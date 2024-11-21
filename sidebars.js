@@ -76,7 +76,6 @@ const sidebars = {
           },
           items: [
             'python-quickstart',
-            'python-client-reference',
             {
               type: 'link',
               label: 'Client Examples',

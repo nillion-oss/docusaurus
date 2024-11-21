@@ -1,4 +1,4 @@
-# Python Client Reference
+<!-- # Python Client Reference
 
 Nillion Client Python module.
 
@@ -2478,4 +2478,4 @@ Return the version of this SDK client.
 
 ```py3
 py_nillion_client.version()
-```
+``` -->
