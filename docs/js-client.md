@@ -1,8 +1,11 @@
 import ThemedImage from '@theme/ThemedImage';
+import DocCardList from '@theme/DocCardList';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-# Nillion TypeScript Client
+# TypeScript Client
 
-The Nillion TypeScript client [client-ts](https://github.com/NillionNetwork/client-ts) provides libraries for interacting with Nillion blind compute networks. This client is structured as a monorepo containing multiple packages to support different use cases and environments.
+The TypeScript client `client-ts` provides libraries for interacting with Nillion blind compute networks. This client is structured as a monorepo containing multiple packages to support different use cases and environments.
 
 ## Quick Start
 
@@ -23,33 +26,98 @@ npx create-nillion-app@latest
   <p>For more detailed information on building with create-nillion-app, check out our [Quickstart Guide](/quickstart).</p>
 </div>
 
-## Installation
+## Manual Installation
 
-Choose your preferred package manager to install the Nillion client libraries:
+### Install Nillion SDK
+
+If you have not already, in your shell/terminal run the following command to install the Nillion SDK. 
 
 ```bash
-# Using npm
-npm install @nillion/client-wasm @nillion/client-vms @nillion/client-react-hooks
-
-# Using pnpm
-pnpm add @nillion/client-wasm @nillion/client-vms @nillion/client-react-hooks
-
-# Using yarn
-yarn add @nillion/client-wasm @nillion/client-vms @nillion/client-react-hooks
+curl https://nilup.nilogy.xyz/install.sh | bash
 ```
 
-## Package Overview
+Then ensure that you can run the `nillion-devnet` command in a separate terminal. Please refer to the [Installation guide](./installation) for further information.
 
-The Nillion client is composed of three main packages:
+### Install the JavaScript Client
 
-### @nillion/client-react-hooks
+Install the following packages in your browser application (i.e. React / Nextjs). The Nillion client is composed of three main packages:
 
-React hooks built on top of `@nillion/client-vms` and integrated with `@tanstack/react-query` for seamless React application development.
+- **_@nillion/client-wasm_**: Collection of utility functions exported from Rust to WebAssembly, providing core functionality for the Nillion ecosystem.
+- **_@nillion/client-vms_**: Primary gRPC client that combines payments and network operations into a simple API. This package supports both web browsers and Node.js environments.
+- **_@nillion/client-react-hooks_**: React hooks built on top of @nillion/client-vms and integrated with @tanstack/react-query for seamless React application development.
 
-### @nillion/client-vms
+<Tabs>
 
-The primary gRPC client that combines payments and network operations into a simple API. This package supports both web browsers and Node.js environments.
+  <TabItem value="npm" label="npm" default>
+```bash
+npm install @nillion/client-wasm @nillion/client-vms @nillion/client-react-hooks
+```
+  </TabItem>
 
-### @nillion/client-wasm
+   <TabItem value="yarn" label="yarn">
+```bash
+yarn add @nillion/client-wasm @nillion/client-vms @nillion/client-react-hooks
+```
+  </TabItem>
 
-A collection of utility functions exported from Rust to WebAssembly, providing core functionality for the Nillion ecosystem.
+  <TabItem value="pnpm" label="pnpm">
+```bash
+pnpm add @nillion/client-wasm @nillion/client-vms @nillion/client-react-hooks
+```
+  </TabItem>
+</Tabs>
+
+## Usage
+This is the barebones initialization needed to start the NillionProvider. You must be running `nillion-devnet` in another terminal to be able to interact with this. 
+
+The approach we take is to:
+1. Import NillionProvider + createClient
+2. Set the client when mounted with UseEffect
+3. Initialized!
+
+*Please note this is based on Next.js so can differ.* 
+
+```typescript
+// page.tsx
+
+"use client";
+
+import { NillionProvider, createClient } from "@nillion/client-react-hooks";
+import type { VmClient } from "@nillion/client-vms";
+import { useEffect, useState } from "react";
+
+export default function Home() {
+  const [client, setClient] = useState<VmClient>();
+
+  useEffect(() => {
+    const init = async () => {
+      const client = await createClient("devnet");
+      setClient(client);
+    };
+    void init();
+  }, []);
+
+  if (!client) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <NillionProvider client={client}>
+      ...
+    </NillionProvider>
+  );
+}
+
+```
+### Updating our next.config.ts
+We also want to update our `next.config.ts` to be able to interact with the Nillion WASM client, hence the overrides. So replace your empty config with the following settings.
+
+```tsx reference showGithubLink
+https://github.com/NillionNetwork/client-ts/blob/main/examples-nextjs/next.config.mjs
+```
+
+
+## Next Steps
+Now you can interact with the Nillion devnet and use the React hooks to do various storage and compute actions with the network.
+
+<DocCardList/>

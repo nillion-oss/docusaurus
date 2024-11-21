@@ -92,15 +92,30 @@ const sidebars = {
           },
           items: [
             {
-              type: 'link',
-              label: 'create-nillion-app',
-              href: 'https://github.com/NillionNetwork/create-nillion-app',
-            },
-            {
-              type: 'link',
-              label: 'client-ts',
-              href: 'https://github.com/NillionNetwork/client-ts',
-            },
+              type: 'category',
+              label: 'Hooks',
+              link: {
+                type: 'doc',
+                id: 'js-client-hooks',
+              },
+              collapsed: true,
+              items: [
+                'js-client-hooks-values',
+                'js-client-hooks-compute',
+                'js-client-hooks-permissions',
+                'js-client-hooks-other',
+              ],
+            }
+            // {
+            //   type: 'link',
+            //   label: 'create-nillion-app',
+            //   href: 'https://github.com/NillionNetwork/create-nillion-app',
+            // },
+            // {
+            //   type: 'link',
+            //   label: 'client-ts',
+            //   href: 'https://github.com/NillionNetwork/client-ts',
+            // },
           ],
         },
         {

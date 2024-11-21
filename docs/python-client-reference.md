@@ -1,148 +1,12 @@
 <!-- # Python Client Reference
 
-Nillion Client Python module.
+Nillion client.
 
-### *class* py_nillion_client.Amount
+<a id="nillion_client.Array"></a>
 
+### *class* nillion_client.Array(value)
 
-
-#### ByteSize()
-
-Returns the size of the message in bytes.
-
-
-
-#### Clear()
-
-Clears the message.
-
-
-
-#### ClearExtension()
-
-Clears a message field.
-
-
-
-#### ClearField()
-
-Clears a message field.
-
-
-
-#### CopyFrom()
-
-Copies a protocol message into the current message.
-
-
-
-#### DESCRIPTOR *= *
-
-
-
-#### DiscardUnknownFields()
-
-Discards the unknown fields.
-
-
-
-#### Extensions
-
-Extension dict
-
-
-
-#### FindInitializationErrors()
-
-Finds unset required fields.
-
-
-
-#### FromString()
-
-Creates new method instance from given serialized data.
-
-
-
-#### HasExtension()
-
-Checks if a message field is set.
-
-
-
-#### HasField()
-
-Checks if a message field is set.
-
-
-
-#### IsInitialized()
-
-Checks if all required fields of a protocol message are set.
-
-
-
-#### ListFields()
-
-Lists all set fields of a message.
-
-
-
-#### MergeFrom()
-
-Merges a protocol message into the current message.
-
-
-
-#### MergeFromString()
-
-Merges a serialized message into the current message.
-
-
-
-#### ParseFromString()
-
-Parses a serialized message into the current message.
-
-
-
-#### *static* RegisterExtension(field_descriptor)
-
-
-
-#### SerializePartialToString()
-
-Serializes the message to a string, even if it isn’t initialized.
-
-
-
-#### SerializeToString()
-
-Serializes the message to a string, only for initialized messages.
-
-
-
-#### SetInParent()
-
-Sets the has bit of the given field in its parent message.
-
-
-
-#### UnknownFields()
-
-Parse unknown field set
-
-
-
-#### WhichOneof()
-
-Returns the name of the field set inside a oneof, or None if no field is set.
-
-
-
-### *class* py_nillion_client.Array(value)
-
-This is a `Array` class used to
+This is a [`Array`](#nillion_client.Array) class used to
 encode a secret array of elements.
 
 Note: \_\_len_\_ method is implemented to allow
@@ -151,9 +15,9 @@ getting the length of the array.
 * **Parameters:**
   **value** (*list*) – List of secret encoded elements.
 * **Returns:**
-  Instance of the `Array` class.
+  Instance of the [`Array`](#nillion_client.Array) class.
 * **Return type:**
-  Array
+  [Array](#nillion_client.Array)
 * **Raises:**
   **ValueError** – invalid secret type: Raises an error when a public encoded element is included inside a
       secret array.
@@ -161,26 +25,23 @@ getting the length of the array.
 ### Example
 
 ```py3
-import py_nillion_client as nillion
+from nillion_client import Array, SecretInteger
 
-secret_array = nillion.Array([
-    nillion.SecretInteger(1),
-    nillion.SecretInteger(2),
-])
+secret_array = Array([ SecretInteger(1), SecretInteger(2) ])
 
 print("The length of the array is: ", len(secret_array))
 ```
 
 ```text
-&gt;&gt;&gt; The length of the array is: 2
+>>> The length of the array is: 2
 ```
 
-
+<a id="nillion_client.Array.value"></a>
 
 #### value
 
 Getter method for the value inside a
-`Array` instance.
+[`Array`](#nillion_client.Array) instance.
 
 * **Returns:**
   List of secret encoded elements.
@@ -194,1925 +55,61 @@ print("My secret array: \n", secret_array.value)
 ```
 
 ```text
-&gt;&gt;&gt; My secret array:
-&gt;&gt;&gt;  [, ]
+>>> My secret array:
+>>>  [SecretInteger(1), SecretInteger(2)]
 ```
 
+<a id="nillion_client.Boolean"></a>
 
+### *class* nillion_client.Boolean(value)
 
-### *exception* py_nillion_client.AuthenticationError
-
-Error related to authentication: invalid password, public key, or other internal errors
-
-
-
-#### args
-
-
-
-#### with_traceback()
-
-Exception.with_traceback(tb) –
-set self._\_traceback_\_ to tb and return self.
-
-
-
-### *class* py_nillion_client.ClusterDescriptor
-
-The `ClusterDescriptor` contains attributes
-that describe the cluster configuration. It includes information
-about:
-
-1. Cluster id;
-2. Security parameters (statistical security and security threshold);
-3. Parties (nodes) in the cluster;
-4. Preprocessing configuration.
-
-This object is returned when invoking `NillionClient` cluster_information method.
-
-### Example
-
-```py3
-cinfo = await client.cluster_information(args.cluster_id)
-```
-
-
-
-#### id
-
-The Cluster identifier.
-
-* **Return type:**
-  A string containing the Nillion Cluster identifier.
-
-### Example
-
-```py3
-cinfo = await client.cluster_information(args.cluster_id)
-print("Cluster id:", cinfo.id)
-```
-
-```text
-&gt;&gt;&gt; Cluster id: 147f8d45-2126-4a54-9a64-8141ee55f51a
-```
-
-
-
-#### kappa
-
-The statistical security parameter kappa for this cluster.
-
-* **Return type:**
-  The value of the statistical security parameter kappa used in this cluster.
-
-### Example
-
-```py3
-cinfo = await client.cluster_information(args.cluster_id)
-print("Statistical sec parameter kappa:", cinfo.kappa)
-```
-
-```text
-&gt;&gt;&gt; Statistical sec parameter kappa: 40
-```
-
-
-
-#### parties
-
-Cluster’s parties ids.
-
-* **Return type:**
-  A list of strings containing the party identifiers in the cluster.
-
-### Example
-
-```py3
-cinfo = await client.cluster_information(args.cluster_id)
-print("Cluster parties' ids:", cinfo.parties)
-```
-
-```text
-&gt;&gt;&gt; Parties: {'12D3KooWJtRXjmV1HctQgvLUcrdxJ7cXwCHiL6PCheikN2rTJ2ZH',
-              '12D3KooWHSveXS4DdXpCQyDDsp9D1x7fiTRnm1fsH9yJRpR6y4FM',
-              '12D3KooWLV6HzUXpt6Tt5HUM5Fo3mpjvwsv9n4ADkJ962ArAZCvX'}
-```
-
-
-
-#### polynomial_degree
-
-The polynomial degree used by this cluster. The polynomial
-degree is directly related with the security threshold of the
-Nillion network.
-
-* **Returns:**
-  * *An integer corresponding to the degree of the polynomial used*
-  * *in the cluster for linear secret sharing.*
-
-### Example
-
-```py3
-cinfo = await client.cluster_information(args.cluster_id)
-print("Polynomial degree:", cinfo.polynomial_degree)
-```
-
-```text
-&gt;&gt;&gt; Polynomial degree: 1
-```
-
-
-
-#### prime
-
-The prime number used in this cluster.
-
-* **Return type:**
-  The identifier of the prime used in the cluster.
-
-### Example
-
-```py3
-cinfo = await client.cluster_information(args.cluster_id)
-print("Prime type:", cinfo.prime)
-```
-
-```text
-&gt;&gt;&gt; Prime: U256SafePrime
-```
-
-
-
-### *exception* py_nillion_client.ComputeError
-
-Error related to the computation: initialization, scheduling, or other internal errors
-
-
-
-#### args
-
-
-
-#### with_traceback()
-
-Exception.with_traceback(tb) –
-set self._\_traceback_\_ to tb and return self.
-
-
-
-### *class* py_nillion_client.ComputeFinishedEvent
-
-The `ComputeFinishedEvent` class is
-returned by an async computation when the computation
-has just finished.
-
-This class has no public constructor and is received from
-method `NillionClient.next_compute_event()`.
-
-
-
-#### result
-
-The computation’s result, as a `FinalResult` class.
-
-Use the `FinalResult.value()` method to
-obtain the wrapped value.
-
-* **Returns:**
-  The `FinalResult` class containing the final result
-  of the computation. Use the `FinalResult.value()` method to
-  obtain the wrapped value.
-* **Return type:**
-  FinalResult
-
-### Example
-
-```py3
-uuid = await client.compute(
-    args.cluster_id,
-    bindings,
-    [store_id],
-    args.compute_secrets,
-    args.compute_public_variables,
-    payment_receipt
-)
-
-while True:
-    event = await client.next_compute_event()
-    if isinstance(event, nillion.ComputeScheduledEvent):
-        pass
-    if isinstance(event, nillion.ComputeFinishedEvent) and event.uuid == uuid:
-        print(
-            f"Received computation result for {event.uuid}, result = {event.result}"
-        )
-        print(
-            f"Received computation result value for {event.uuid}, value = {event.result.value}"
-        )
-        break
-```
-
-
-
-#### uuid
-
-The computation’s UUID.
-
-* **Returns:**
-  Uuid
-* **Return type:**
-  str
-
-### Example
-
-```py3
-uuid = await client.compute(
-    args.cluster_id,
-    bindings,
-    [store_id],
-    args.compute_secrets,
-    args.compute_public_variables,
-    payment_receipt
-)
-
-while True:
-    event = await client.next_compute_event()
-    if isinstance(event, nillion.ComputeScheduledEvent):
-        pass
-    if isinstance(event, nillion.ComputeFinishedEvent) and event.uuid == uuid:
-        print(
-            f"Result for computation with UUID {event.uuid} is ready!"
-        )
-        break
-```
-
-
-
-### *class* py_nillion_client.ComputeScheduledEvent
-
-The `ComputeScheduledEvent` class is
-returned by an async computation when the computation is not finished yet.
-
-This class has no public constructor and is received from
-method `NillionClient.next_compute_event()`.
-
-
-
-#### uuid
-
-The computation’s UUID. This outputs the same UUID
-provided by the `NillionClient.compute()` method.
-
-* **Returns:**
-  Computation UUID.
-* **Return type:**
-  str
-
-### Example
-
-```py3
-uuid = await client.compute(
-    args.cluster_id,
-    bindings,
-    [store_id],
-    args.compute_secrets,
-    args.compute_public_variables,
-    payment_receipt
-)
-
-event = await client.next_compute_event()
-if isinstance(event, nillion.ComputeScheduledEvent):
-    computation_uuid = event.uuid
-```
-
-
-
-### *class* py_nillion_client.ConnectionMode
-
-This is a `ConnectionMode` class. It designates the
-connection mode to use in a client constructor. We support three
-different modes:
-
-1. Dialer (`dialer()`);
-2. Direct (`direct()`);
-3. Relay (`relay()`).
-
-
-
-#### dialer()
-
-Specifies the client should connect in dialer mode.
-
-In this mode the client only allows outgoing connections, so no need to
-listen or open a port. This mode prohibits this client from recieving results,
-as an output party, from the network.
-
-* **Return type:**
-  ConnectionMode
-
-### Example
-
-```py3
-connection_mode = ConnectionMode.dialer()
-```
-
-
-
-#### direct()
-
-Specifies a socket address structure for a listening client connection.
-
-This mode is suited for clients that are backend services.
-
-You allow incoming and outgoing connections, they are done directly so you have to listen and have the port open to receive incoming connections. This option is faster than relay as it avoids the extra hop, but requires to have the port open / have port forwarding in NATs and firewalls. This mode requires that the client’s IPv4 address is addressible on the internet.
-
-* **Parameters:**
-  **str** – Socket address structure.
-* **Return type:**
-  ConnectionMode
-
-### Example
-
-```py3
-connection_mode = ConnectionMode.direct('0.0.0.0:11337')
-```
-
-
-
-#### relay()
-
-Specifies the client connects to the Nillion Network in
-relay mode. So, if others want to contact the client, they
-have to do so through a relay node that the client is connected to
-(all nodes in the network are relay nodes).
-
-This mode is suited for clients that cannot open a port like
-phones behind a CGNAT, desktop apps behind a NAT or Firewall, and others.
-
-You allow incoming and outgoing connection but the incoming are established via
-a node in the network (the relayer) so that you don’t need to listen and open a port.
-This is slower than direct because it adds another hop in the connection but allows to
-bypass NATs and Firewalls. Also this option adds more load to the p2p network of the
-nodes becasue they have to do the relay increasing the incoming and outgoing traffic
-+ processing of secure connections.
-
-* **Return type:**
-  ConnectionMode
-
-### Example
-
-```py3
-connection_mode = ConnectionMode.relay()
-```
-
-
-
-### *exception* py_nillion_client.DealerError
-
-Error related to the dealer: initialization, scheduling, unexpected errors
-
-
-
-#### args
-
-
-
-#### with_traceback()
-
-Exception.with_traceback(tb) –
-set self._\_traceback_\_ to tb and return self.
-
-
-
-### *class* py_nillion_client.FinalResult
-
-This is a `FinalResult` class that is returned
-from a finished computation.
-
-This class has no public constructor and is received from
-method `ComputeFinishedEvent.result()`.
-
-
-
-#### value
-
-The resulting value of a computation.
-
-* **Returns:**
-  Result value from a computation.
-* **Return type:**
-  Dict
-
-### Example
-
-```py3
-uuid = await client.compute(
-    args.cluster_id,
-    bindings,
-    [store_id],
-    args.compute_secrets,
-    args.compute_public_variables,
-    payment_receipt
-)
-
-while True:
-    event = await client.next_compute_event()
-    if isinstance(event, nillion.ComputeScheduledEvent):
-        pass
-    if isinstance(event, nillion.ComputeFinishedEvent) and event.uuid == uuid:
-        print(
-            f"Received computation result value for {event.uuid}, value = {event.result.value}"
-        )
-        break
-```
-
-
-
-### *class* py_nillion_client.Integer(value)
-
-This is a `Integer` class used to
-encode a public variable value as an integer.
-
-Note: \_\_eq_\_ method is implemented to allow
-to compare two integers.
+This is a [`Boolean`](#nillion_client.Boolean) class used to encode a public variable value as an boolean.
 
 * **Parameters:**
   **value** (*int*) – Value of the public encoded element.
 * **Returns:**
-  Instance of the `Integer` class.
+  Instance of the [`Boolean`](#nillion_client.Boolean) class.
 * **Return type:**
-  Integer
+  [Boolean](#nillion_client.Boolean)
 
 ### Example
 
 ```py3
-import py_nillion_client as nillion
+from nillion_client import Boolean
 
-pub_integer_1 = nillion.Integer(1)
-pub_integer_2 = nillion.Integer(2)
+pub_boolean_1 = Boolean(True)
+pub_boolean_2 = Boolean(False)
 
-print("Are the public integers the same? ", pub_integer_1 == pub_integer_2)
+print("Are the public booleans the same? ", pub_boolean_1 == pub_boolean_2)
 ```
 
 ```text
-&gt;&gt;&gt; Are the public integers the same?  False
+>>> Are the public booleans the same?  False
 ```
 
-
+<a id="nillion_client.Boolean.value"></a>
 
 #### value
 
-Getter and setter for the value inside a
-`Integer` instance.
+<a id="nillion_client.ComputeId"></a>
 
-* **Returns:**
-  The value of the public integer.
-* **Return type:**
-  int
+### nillion_client.ComputeId
 
-### Example
+alias of `UUID`
 
-```py3
-pub_integer = nillion.Integer(1)
-print("Public integer is: ", pub_integer.value)
-pub_integer.value = 2
-print("Public integer is now: ", pub_integer.value)
-```
+<a id="nillion_client.EcdsaDigestMessage"></a>
 
-```text
-&gt;&gt;&gt; Public integer is:  1
-&gt;&gt;&gt; Public integer is now:  2
-```
+### *class* nillion_client.EcdsaDigestMessage(value)
 
-
-
-### *class* py_nillion_client.MsgPayFor
-
-
-
-#### ByteSize()
-
-Returns the size of the message in bytes.
-
-
-
-#### Clear()
-
-Clears the message.
-
-
-
-#### ClearExtension()
-
-Clears a message field.
-
-
-
-#### ClearField()
-
-Clears a message field.
-
-
-
-#### CopyFrom()
-
-Copies a protocol message into the current message.
-
-
-
-#### DESCRIPTOR *= *
-
-
-
-#### DiscardUnknownFields()
-
-Discards the unknown fields.
-
-
-
-#### Extensions
-
-Extension dict
-
-
-
-#### FindInitializationErrors()
-
-Finds unset required fields.
-
-
-
-#### FromString()
-
-Creates new method instance from given serialized data.
-
-
-
-#### HasExtension()
-
-Checks if a message field is set.
-
-
-
-#### HasField()
-
-Checks if a message field is set.
-
-
-
-#### IsInitialized()
-
-Checks if all required fields of a protocol message are set.
-
-
-
-#### ListFields()
-
-Lists all set fields of a message.
-
-
-
-#### MergeFrom()
-
-Merges a protocol message into the current message.
-
-
-
-#### MergeFromString()
-
-Merges a serialized message into the current message.
-
-
-
-#### ParseFromString()
-
-Parses a serialized message into the current message.
-
-
-
-#### *static* RegisterExtension(field_descriptor)
-
-
-
-#### SerializePartialToString()
-
-Serializes the message to a string, even if it isn’t initialized.
-
-
-
-#### SerializeToString()
-
-Serializes the message to a string, only for initialized messages.
-
-
-
-#### SetInParent()
-
-Sets the has bit of the given field in its parent message.
-
-
-
-#### UnknownFields()
-
-Parse unknown field set
-
-
-
-#### WhichOneof()
-
-Returns the name of the field set inside a oneof, or None if no field is set.
-
-
-
-### *class* py_nillion_client.NadaValues(values)
-
-This is a `NadaValues` class used to
-hold secrets and public values. It can contain:
-
-1. Secret integers (`SecretInteger`);
-2. Secret unsigned integers (`SecretUnsignedInteger`);
-3. Arrays (`Array`).
-4. Public integers (`PublicInteger`)
-5. Public unsigned integers (`PublicUnsignedInteger`)
-
-This class is used by the `NillionClient.compute()` method to pass the
-secrets used by the corresponding Nada program that are not stored.
-
-* **Parameters:**
-  **values** (*dict*) – A map of named encoded secret and public values to store
-* **Returns:**
-  Instance of the `NadaValues` class.
-* **Return type:**
-  NadaValues
-* **Raises:**
-  **ValueError** – invalid public variable type: Raises an error when a public variabel element is included inside
-      the secrets dictionary.
-
-### Example
-
-```py3
-import py_nillion_client as nillion
-
-sec_uinteger = nillion.SecretUnsignedInteger(1)
-sec_integer = nillion.SecretInteger(1)
-sec_array = nillion.SecretArray([
-    nillion.SecretInteger(1),
-    nillion.SecretInteger(2),
-])
-
-secrets = nillion.NadaValues({
-    "sec_uinteger": sec_uinteger,
-    "sec_integer": sec_integer,
-    "sec_array": sec_array
- })
-```
-
-
-
-#### dict()
-
-Returns the stored values as a dictionary.
-
-* **Returns:**
-  Native python dictionary with mapped encoded values
-* **Return type:**
-  dict
-
-### Example
-
-```py3
-values = nillion.NadaValues({
-    "sec_uinteger": sec_uinteger,
-    "sec_integer": sec_integer,
-    "sec_array": sec_array
- })
-
-print("Values:\n", values.dict())
-```
-
-```text
-&gt;&gt;&gt; Values:
-&gt;&gt;&gt;  {'sec_array': , 'sec_uinteger': , 'sec_integer': }
-```
-
-
-
-### *class* py_nillion_client.NillionClient(node_key, bootnodes, connection_mode, user_key, whitelist=None)
-
-The `NillionClient` class serves as
-the primary tool for connecting to the Nillion
-network and facilitating various operations.
-It allows users to interact with the Nillion
-network efficiently, including for the following actions:
-
-1. Store Nada programs (`store_program()`);
-2. Store values (`store_values()`);
-3. Update values (`update_values()`);
-4. Retrieve values (`retrieve_value()`);
-5. Delete values (`delete_values()`);
-6. Compute a Nada program over some secrets (`compute()`);
-7. Receive compute results (`next_compute_event()`).
-
-An instance of `NillionClient` can embody either
-a dealer node, responsible for providing inputs, or a result
-node, tasked with receiving computation outputs. Under the hood,
-this spawns a set of actors and acts as a node in the network that
-has both dealer and result node capabilities.
-
-Note: multiple instances can be employed concurrently if required;
-however, it is imperative that each instance possesses
-a distinct `NodeKey` when utilized within the
-same interpreter.
-
-* **Parameters:**
-  * **node_key** (*NodeKey*) – A private key to use for the Client node.
-  * **bootnodes** (*list* *of* *str*) – A list of nodes belonging to the network (other may be discovered later).
-  * **connection_mode** (*ConnectionMode*) – How to connect to the network, either directly (indicating a listen address), through a relay server or as a dialer client.
-  * **user_key** (*UserKey*) – User credentials to use.
-  * **whitelist** (*list* *of* *str* *,* *optional*) – A list of peer ids to connecto to/from.
-* **Returns:**
-  Instance of the NillionClient and an event receiver channel used to retrieve computation results.
-* **Return type:**
-  NillionClient
-
-### Example
-
-For further information about the structure of the objects used by the
-constructor, we refer to the quickstart guide .
-
-```py3
-import py_nillion_client as nillion
-
-node_key = nillion.NodeKey.from_file("/path/to/node/key")
-bootnodes = [os.getenv("NILLION_BOOTNODE_MULTIADDRESS")]
-# e.g. bootnodes = ["/ip4/127.0.0.1/tcp/45305/p2p/11E4UiiRgsJILZYeushYEOQyMCrJLeRTaonNxBMBq4oF6bJ6MfoF"]
-connection_mode = nillion.ConnectionMode.dialer()
-user_key = nillion.UserKey.from_file("/path/to/user/key")
-
-client = nillion.NillionClient(
-      node_key,
-      bootnodes,
-      nillion.ConnectionMode.relay(),
-      user_key,
-  )
-```
-
-
-
-#### build_version *= 'client/0.1.0 (commit: 2454586480c93ea9664ddc563cac902e0bb03278; ts: 1720014719; date: 2024-07-03T13:51:59+00:00)'*
-
-
-
-#### cluster_information(cluster_id)
-
-Get information about a cluster by returning an instance of the `ClusterDescriptor` class.
-We can access various information about the cluster through its methods.
-
-* **Parameters:**
-  **cluster_id** (*str*) – UUID of the targeted preprocessing cluster.
-* **Return type:**
-  An instance of `ClusterDescriptor` populated with the cluster information.
-
-### Example
-
-```py3
-await client.cluster_information(cluster_id)
-```
-
-
-
-#### compute(cluster_id, bindings, store_ids, values, receipt)
-
-Requests a compute action in the Nillion Network for a specific Nada
-program under a set of secrets.
-
-Note: This method does not directly output the result of the Nada
-program. Instead, it returns a computation UUID. To obtain the result,
-you’ll need to fetch it separately. The UUID, in conjunction with the
-event provided by the corresponding NillionClient instance channel,
-allows you to retrieve the computation results. Please refer to the e
-xample below for clarification.
-
-* **Parameters:**
-  * **cluster_id** (*str*) – UUID of the targeted preprocessing cluster
-  * **bindings** (*ProgramBindings*) – The prepared program specification and secret bindings
-  * **secrets** (*Secrets*) – Additional secrets to use for the computation
-  * **store_ids** (*list* *of* *str*) – List of the store IDs (uuids) of the secrets to use for the computation
-  * **public_variables** (*PublicVariables*) – Public variables to use for the computation
-  * **receipt** (*PaymentReceipt*) – The receipt for the payment made.
-* **Returns:**
-  A computation UUID.
-* **Return type:**
-  str
-
-### Example
-
-```py3
-import py_nillion_client as nillion
-
-store_payment_receipt   = ... # quote + pay
-compute_payment_receipt = ... # quote + pay
-
-bindings = nillion.ProgramBindings(args.program_id)
-bindings.add_input_party("Dealer", client.party_id)
-store_id = await client.store_values(
-    args.cluster_id, bindings, args.store_values, None, store_payment_receipt
-)
-
-bindings = nillion.ProgramBindings(args.program_id)
-bindings.add_input_party("Dealer", client.party_id)
-bindings.add_output_party("Result", client.party_id)
-
-uuid = await client.compute(
-    args.cluster_id,
-    bindings,
-    [store_id],
-    args.values,
-    compute_payment_receipt
-)
-
-while True:
-    event = await client.next_compute_event()
-    if isinstance(event, nillion.ComputeScheduledEvent):
-        pass
-    if isinstance(event, nillion.ComputeFinishedEvent) and event.uuid == uuid:
-        print(
-            f"Received computation result for {event.uuid}, result = {event.result}"
-        )
-        print(
-            f"Received computation result value for {event.uuid}, value = {event.result.value}"
-        )
-        break
-```
-
-
-
-#### delete_values(cluster_id, store_id)
-
-Delete existing values.
-
-* **Parameters:**
-  * **cluster_id** (*str*) – UUID of the targeted preprocessing cluster
-  * **store_id** (*str*) – The identifier of the stored secret to be deleted (returned when calling `store_values()`)
-* **Return type:**
-  None
-
-### Example
-
-```py3
-await client.delete_values(cluster_id, store_id)
-```
-
-
-
-#### next_compute_event()
-
-Returns the state of the computation in the Nillion Network.
-
-If the event is from an ongoing computation, it only includes
-the corresponding UUID from the  `compute()` process.
-Once the computation is complete, the event includes both the
-UUID and the computation result (`FinalResult`).
-
-* **Returns:**
-  Either event type will pull the next compute event from the internal
-  result channel which can be inspected to determine if compute operation
-  has completed
-* **Return type:**
-  ComputeScheduledEvent | ComputeFinishedEvent
-
-### Example
-
-```py3
-uuid = await client.compute(
-    args.cluster_id,
-    bindings,
-    [store_id],
-    args.compute_secrets,
-    args.compute_public_variables,
-    payment_receipt
-)
-
-while True:
-    event = await client.next_compute_event()
-    if isinstance(event, nillion.ComputeScheduledEvent):
-        print(
-            f"Waiting for computation with UUID={event.uuid} to finish."
-        )
-    if isinstance(event, nillion.ComputeFinishedEvent) and event.uuid == uuid:
-        print(
-            f"Received computation result for {event.uuid}, result = {event.result}"
-        )
-        print(
-            f"Received computation result value for {event.uuid}, value = {event.result.value}"
-        )
-        break
-```
-
-
-
-#### party_id
-
-Returns the SDK client’s instance party ID, which can be used
-by the client to create program bindings (`ProgramBindings`,
-check examples).
-
-Effectively, the party ID is equivalent to the Peer ID
-used within libp2p for inter-node communication. It is a hash
-generated from the public key of the node’s key-pair (`NodeKey`). Not to
-be confused with the `user_id()` which is generated from the
-public key of the user’s key-pair (`UserKey`).
-
-Read more about party ID
-and peer ID.
-
-* **Returns:**
-  UUID of libp2p party identifier.
-* **Return type:**
-  str
-
-### Example
-
-```py3
-print("Party ID:", client.party_id)
-```
-
-
-
-#### request_price_quote(cluster_id, operation)
-
-Request a price quote for an operation. This method
-asks the network to calculate a price quote for the
-specified operation. Payment and submission of the
-operation is the client’s responsibility and must be
-done before the quote expires.
-
-Note that the nodes of your target Nillion petnet cluster
-will be bound to a single payment network (eg. testnet).
-
-* **Parameters:**
-  * **cluster_id** (*str*) – UUID of the targeted preprocessing cluster
-  * **operation** (*Operation*) – The operation to get a price quote for.
-* **Returns:**
-  The price quoted for this operation.
-* **Return type:**
-  PriceQuote
-
-### Example
-
-```py3
-secrets = py_nillion_client.Secrets(
-    {
-         "foo": py_nillion_client.SecretInteger(42),
-         "bar": py_nillion_client.SecretBlob(bytearray(b"hello world")),
-    }
-)
-operation = py_nillion_client.Operation.store_values(secrets)
-quote = await client.request_price_quote(cluster_id, operation)
-# this is where you activate your payment method
-txn_hash = yourapp.your_payment_method_in_unil(quote.cost)
-payment_receipt = nillion.PaymentReceipt(quote, txn_hash)
-store_id = await client.store_values(
-    cluster_id, secrets, None, payment_receipt
-)
-```
-
-```py3
-updated_secrets = nillion.Secrets({"foo": nillion.SecretInteger(42)})
-operation = py_nillion_client.Operation.update_values(updated_secrets)
-quote = await client.request_price_quote(cluster_id, operation)
-# this is where you activate your payment method
-txn_hash = yourapp.your_payment_method_in_unil(quote.cost)
-payment_receipt = nillion.PaymentReceipt(quote, txn_hash)
- await client.update_values(
-     args.cluster_id, store_id, update_values, payment_receipt
- )
-```
-
-```py3
-# compute quote is based on compute time secrets; stored secrets have already
-# been paid
-secrets = nillion.Secrets({"fortytwo": nillion.SecretInteger(42)})
-quote = py_nillion_client.Operation.compute(program_id, secrets)
-# this is where you activate your payment method
-txn_hash = yourapp.your_payment_method_in_unil(quote.cost)
-payment_receipt = nillion.PaymentReceipt(quote, txn_hash)
-
-uuid = await client.compute(
-    args.cluster_id,
-    bindings,
-    [store_id],
-    secrets,
-    py_nillion_client.PublicVariables({}),
-    compute_payment_receipt
-)
-```
-
-```py3
-value_name = "fortytwo"
-operation = py_nillion_client.Operation.retrieve_value()
-quote = await client.request_price_quote(cluster_id, operation)
-# this is where you activate your payment method
-txn_hash = yourapp.your_payment_method_in_unil(quote.cost)
-payment_receipt = nillion.PaymentReceipt(quote, txn_hash)
-result = await client.retrieve_value(cluster_id, args.store_id, value_name, payment_receipt)
-```
-
-```py3
-program_name = "myprogram"
-program_mir_path = f"./your/compiled/programs/{program_name}.nada.bin"
-operation = py_nillion_client.Operation.store_program(program_mir_path)
-quote = await client.request_price_quote(cluster_id, operation)
-# this is where you activate your payment method
-txn_hash = yourapp.your_payment_method_in_unil(quote.cost)
-payment_receipt = nillion.PaymentReceipt(quote, txn_hash)
-program_id = await client.store_program(
-    args.cluster_id, program_name, program_mir_path, payment_receipt
-)
-```
-
-```py3
-operation = py_nillion_client.Operation.retrieve_permissions()
-quote = await client.request_price_quote(cluster_id, operation)
-# this is where you activate your payment method
-txn_hash = yourapp.your_payment_method_in_unil(quote.cost)
-payment_receipt = nillion.PaymentReceipt(quote, txn_hash)
-permissions = await client.retrieve_permissions(cluster_id, store_id, payment_receipt)
-```
-
-```py3
-operation = py_nillion_client.Operation.update_permissions()
-quote = await client.request_price_quote(cluster_id, operation)
-# this is where you activate your payment method
-txn_hash = yourapp.your_payment_method_in_unil(quote.cost)
-payment_receipt = nillion.PaymentReceipt(quote, txn_hash)
-permissions = nillion.Permissions.default_for_user(client.user_id())
-permissions.add_retrieve_permissions(set([args.retriever_user_id]))
-updated_store_id = await client.update_permissions(args.cluster_id, store_id, permissions, payment_receipt)
-```
-
-
-#### retrieve_permissions(cluster_id, store_id, receipt)
-
-Retrieve permissions for a group of secrets in the Nillion Network
-
-* **Parameters:**
-  * **cluster_id** (*str*) – UUID of the targeted preprocessing cluster
-  * **store_id** (*str*) – The secrets’ store ID (returned when calling `store_values()`)
-  * **receipt** (*PaymentReceipt*) – The receipt for the payment made.
-* **Returns:**
-  The permissions
-* **Return type:**
-  Permissions
-
-### Example
-
-```py3
-permissions = await client.retrieve_permissions(cluster_id, store_id, payment_receipt)
-```
-
-
-
-#### retrieve_value(cluster_id, store_id, value_id, receipt)
-
-Retrieve a value stored in the Nillion Network.
-
-To retrieve the value, you need to use the value
-attribute on the second element of the output tuple.
-Check the example below to read the value
-of a secret integer.
-
-* **Parameters:**
-  * **cluster_id** (*str*) – UUID of the targeted preprocessing cluster.
-  * **store_id** (*str*) – The value’s store ID (returned when calling `store_values()`).
-  * **value_id** (*str*) – The value’s ID.
-  * **receipt** (*PaymentReceipt*) – The receipt for the payment made.
-* **Returns:**
-  The value ID as a UUID as well as the value itself.
-* **Return type:**
-  tuple
-
-### Example
-
-```py3
-value_name = "fortytwo"
-result = await client.retrieve_value(cluster_id, args.store_id, value_name, payment_receipt)
-print("Value ID: ", result[0])
-print("Value: ", result[1])
-```
-
-```text
-&gt;&gt;&gt; Value ID: 2424a65c-d20c-4635-b864-06c064188dd4
-&gt;&gt;&gt; Value: 42
-```
-
-
-
-#### store_program(cluster_id, program_name, program_mir_path, receipt)
-
-Store programs in the Nillion Network.
-
-The program_id used by `store_values()` and `compute()` can be
-built as follows:
-
-```py3
-client.user_id + "/" + program_name
-```
-
-where client is a `NillionClient` instantiation and program_name
-is the name of the program.
-
-* **Parameters:**
-  * **cluster.** ( *\* cluster_id - UUID* *of* *the targeted preprocessing*) – 
-  * **store.** ( *\* program_name - Name* *of* *the program to*) – 
-  * **stored.** ( *\* program_mir_path - Path to the MIR program being*) – 
-  * **made.** ( *\* receipt - The receipt for the payment*) – 
-* **Returns:**
-  The program identifier associated with the program
-* **Return type:**
-  str
-
-### Example
-
-```py3
-program_name = "prog"
-program_mir_path = "programs-compiled/prog.nada.bin"
-
-# Store program in the Network
-print(f"Storing program in the network: {program_name}")
-program_id = await client.store_program(
-    args.cluster_id, program_name, program_mir_path, payment_receipt
-)
-print("program_id is: ", program_id)
-```
-
-
-
-#### store_values(cluster_id, values, permissions, receipt)
-
-Store values in the Nillion Network.
-
-* **Parameters:**
-  * **cluster_id** (*str*) – UUID of the targeted preprocessing cluster
-  * **secrets** (*Secrets*) – The secrets to store; this is a hash map indexed by secret IDs
-  * **permissions** (*Permissions* *,* *optional*) – permissions to be set. By default the user has update and retrieve permissions on the secret as well as compute permissions for the program bound, should there be a program bound.
-  * **receipt** (*PaymentReceipt*) – The receipt for the payment made.
-* **Returns:**
-  A store identifier that can be used to retrieve the secret.
-* **Return type:**
-  str
-* **Raises:**
-  **TypeError** – When using bindings, the input party name provided (e.g. “InputPartyName”) must
-  match the input party name in the Nada program. Otherwise, we get a TypeError.
-
-### Example
-
-Here are some examples of how to use this function. Note that to
-give permissions we use the User ID and to bind a secret to a
-program we use the Party ID.
-
-```py3
-###########################
-# Example 1 - Simple      #
-###########################
-# Notice that both bindings and permissions are set to None.
-# Bindings need to be set to use secrets in programs
-# Permissions need to be set to allow users other than the secret creator to use the secret
-secrets = nillion.Secrets({"fortytwo": nillion.SecretInteger(42)})
-store_id = await client.store_values(
-    cluster_id, secrets, None, payment_receipt
-)
-
-###########################
-# Example 2 - Permissions #
-###########################
-permissions = nillion.Permissions.default_for_user(client.user_id)
-permissions.add_retrieve_permissions(set([args.retriever_user_id]))
-values = nillion.NadaValues({"fortytwo": nillion.SecretInteger(42)})
-store_id = await client.store_values(
-    cluster_id, secrets, permissions, payment_receipt
-)
-```
-
-
-
-#### update_permissions(cluster_id, store_id, permissions, receipt)
-
-Update permissions for a group of secrets in the Nillion Network
-
-* **Parameters:**
-  * **cluster_id** (*str*) – UUID of the targeted preprocessing cluster
-  * **store_id** (*str*) – The secrets’ store ID (returned when calling `store_values()`)
-  * **permissions** (*Permissions* *,* *optional*) – permissions to be set.
-  * **receipt** (*PaymentReceipt*) – The receipt for the payment made.
-* **Returns:**
-  The unique identifier of this update operation ID that can be used to help troubleshoot issues with this operation.
-* **Return type:**
-  str
-
-### Example
-
-```py3
-# Store
-store_payment_receipt = ... # quote + pay for action
-secrets = nillion.Secrets({"fortytwo": nillion.SecretInteger(42)})
-store_id = await client.store_values(
-  cluster_id, None, secrets, None, store_payment_receipt
-)
-
-update_payment_receipt = ... # quote + pay for action
-# Update permissions
-permissions = nillion.Permissions.default_for_user(client.user_id())
-permissions.add_retrieve_permissions(set([args.retriever_user_id]))
-updated_store_id = await client.update_permissions(args.cluster_id, store_id, permissions, update_payment_receipt)
-
-print("Stored secret id: ", store_id)
-print("Updated stored secret id: ", updated_store_id)
-```
-
-```text
-&gt;&gt;&gt; Stored secret id: 3c504263-fd3f-40b8-8a1d-9056b7846637
-&gt;&gt;&gt; Updated stored secret id: ccdb8036-2635-40d9-9144-2cc89551fce9
-```
-
-
-
-#### update_values(cluster_id, store_id, values, receipt)
-
-Update values already stored in the Nillion Network.
-
-* **Parameters:**
-  * **cluster_id** (*str*) – UUID of the targeted preprocessing cluster.
-  * **store_id** (*str*) – The secret’s store ID (returned when calling `store_values()`).
-  * **values** (*Secrets*) – The values to update; this is a hash map indexed by secret IDs.
-  * **receipt** (*PaymentReceipt*) – The receipt for the payment made.
-* **Returns:**
-  The unique identifier of this update operation.
-* **Return type:**
-  str
-
-### Example
-
-```py3
-updated_secrets = nillion.Secrets({"fortytwo": nillion.SecretInteger(42)})
-payment_receipt = ... # quote + pay
-await client.update_values(
-    args.cluster_id, store_id, update_values, payment_receipt
-)
-```
-
-
-
-#### user_id
-
-Returns SDK client’s user ID, which is the public user
-identifier.
-
-The user ID is used to:
-
-1. Generate a program ID (identification of a program in the Nillion Network). Check example in `store_program()`;
-2. Grant a user permission to use secrets. Check `Permissions`.
-
-It is a hash generated from the public key of the user’s key-pair (`UserKey`). Not to
-be confused with the `party_id()` which is the generated from the
-public key of the node’s key-pair (`NodeKey`).
-
-Read more about user ID
-in the Nillion Docs.
-
-* **Returns:**
-  Client’s user identifier.
-* **Return type:**
-  str
-
-### Example
-
-```py3
-print("Party ID:", client.user_id)
-```
-
-
-
-### *class* py_nillion_client.NodeKey
-
-This is a `NodeKey` class that
-contains a private key used by the
-underlying libp2p to form multiaddress and
-identity secrets. This class is consumed by `NillionClient`
-class to initialize a client.
-
-This object’s constructors can be used via the following
-class methods:
-
-1. From string encoded in Base58 (`from_base58()`);
-2. From a file (`from_file()`);
-3. From a seed (`from_seed()`).
-
-### Example
-
-```py3
-from py_nillion_client import NodeKey
-node_key = NodeKey.from_seed('my_seed')
-```
-
-
-
-#### from_base58()
-
-Decodes a private key from a string encoded in Base58.
-
-* **Parameters:**
-  **contents** (*str*) – A base58 string.
-* **Return type:**
-  NodeKey
-
-### Example
-
-```py3
-from py_nillion_client import NodeKey
-node_key = NodeKey.from_base58()
-```
-
-
-
-#### from_file()
-
-Loads a file containing a private key.
-
-* **Parameters:**
-  **path** (*str*) – The filesystem path to the file containing
-  a base58 string.
-* **Return type:**
-  NodeKey
-
-### Example
-
-```py3
-from py_nillion_client import NodeKey
-node_key = NodeKey.from_file('/path/to/nodekey.base58')
-```
-
-
-
-#### from_seed()
-
-Generates a private key using a seed.
-
-* **Parameters:**
-  **path** (*str*) – A seed string.
-* **Return type:**
-  NodeKey
-
-### Example
-
-```py3
-from py_nillion_client import NodeKey
-node_key = NodeKey.from_seed('my_seed')
-```
-
-
-
-### *class* py_nillion_client.Operation
-
-An operation that we want to run on the network.
-
-
-
-#### compute(values)
-
-Construct a new update values operation.
-
-* **Parameters:**
-  * **program_id** (*str*) – The identifier of the program to be invoked.
-  * **values** (*NadaValues*) – The values to be stored.
-* **Return type:**
-  Operation
-
-
-
-#### retrieve_permissions()
-
-Construct a new retrieve permissions operation.
-
-* **Return type:**
-  Operation
-
-
-
-#### retrieve_value()
-
-Construct a new retrieve value operation.
-
-* **Return type:**
-  Operation
-
-
-
-#### store_program()
-
-Construct a new store program operation.
-
-* **Return type:**
-  Operation
-
-
-
-#### store_values(ttl_days)
-
-Construct a new store values operation.
-
-* **Parameters:**
-  * **values** (*Secrets*) – The values to be stored.
-  * **ttl_days** (*int*) – The time to live for the values in days
-* **Return type:**
-  Operation
-
-
-
-#### update_permissions()
-
-Construct a new update permissions operation.
-
-* **Return type:**
-  Operation
-
-
-
-#### update_values(ttl_days)
-
-Construct a new update values operation.
-
-* **Parameters:**
-  * **values** (*NadaValues*) – The values to be stored.
-  * **ttl_days** (*int*) – The time to live for the values in days.
-* **Return type:**
-  Operation
-
-
-
-### *exception* py_nillion_client.PaymentError
-
-Payment-related errors: missing funds or other errors
-
-
-
-#### args
-
-
-
-#### with_traceback()
-
-Exception.with_traceback(tb) –
-set self._\_traceback_\_ to tb and return self.
-
-
-
-### *class* py_nillion_client.PaymentReceipt(quote, transaction_hash)
-
-A payment receipt.
-
-Payment receipt are used to indicate that you made the payment for a price quote.
-
-
-
-### *exception* py_nillion_client.PermissionError
-
-Missing permission errors
-
-
-
-#### args
-
-
-
-#### with_traceback()
-
-Exception.with_traceback(tb) –
-set self._\_traceback_\_ to tb and return self.
-
-
-
-### *class* py_nillion_client.Permissions
-
-This is a `Permissions` class used to
-manage permissions of stored secrets and compute.
-Permissions need to be set to allow users other
-than the secret creator to use the secret. This
-class is used either by `NillionClient.store_values()`
-or by `NillionClient.update_permissions()`.
-
-The default instantiation of this class is given by
-the method `default_for_user()`.
-
-### Example
-
-See examples
-on method `request_price_quote()`.
-
-
-
-#### add_compute_permissions(compute)
-
-Add compute permissions to the `Permissions` instance for the
-user IDs provided.
-
-* **Parameters:**
-  **compute** (*dict* *of* *set* *of* *str*) – Dict keyed by the user_id of the targets where the value is a set of str
-  specifying which program IDs to permit compute for.
-
-### Example
-
-```py3
-import py_nillion_client as nillion
-
-program_id = client.user_id() + "/" + "program_name"
-permissions = nillion.Permissions.default_for_user(client.user_id)
-permissions.add_compute_permissions({
-    args.compute_user_id: {program_id},
-})
-```
-
-
-
-#### add_delete_permissions(delete)
-
-Add delete permissions to the `Permissions` instance for the
-given set of user IDs
-
-* **Parameters:**
-  **delete** (*set* *of* *str*) – Desired targets to permit delete `Secrets`.
-
-### Example
-
-```py3
-import py_nillion_client as nillion
-
-permissions = nillion.Permissions.default_for_user(client.user_id)
-permissions.add_delete_permissions(set([args.delete_user_id]))
-```
-
-
-
-#### add_retrieve_permissions(retrieve)
-
-Add retrieve permissions to the `Permissions` instance for the
-given set of user IDs.
-
-* **Parameters:**
-  **retrieve** (*set* *of* *str*) – Desired targets to permit read of stored programs or retrieve `Secrets`
-
-### Example
-
-```py3
-import py_nillion_client as nillion
-
-permissions = nillion.Permissions.default_for_user(client.user_id)
-permissions.add_retrieve_permissions(set([args.retriever_user_id]))
-```
-
-
-
-#### add_update_permissions(update)
-
-Add update permissions to the `Permissions` instance for the
-given set of user IDs.
-
-* **Parameters:**
-  **update** (*set* *of* *str*) – Desired targets to permit update `Secrets`.
-
-### Example
-
-```py3
-import py_nillion_client as nillion
-
-permissions = nillion.Permissions.default_for_user(client.user_id)
-permissions.add_update_permissions(set([args.update_user_id]))
-```
-
-
-
-#### *static* default_for_user(user_id)
-
-Returns the default permission set for the given user ID.
-
-Note: this method can be used to clear/revoke permissions
-previously granted by the user.
-
-* **Parameters:**
-  **user_id** (*str*) – Desired target user ID.
-* **Return type:**
-  Permissions
-
-### Example
-
-```py3
-import py_nillion_client as nillion
-
-permissions = nillion.Permissions.default_for_user(client.user_id)
-```
-
-
-
-#### is_compute_allowed(user_id, program)
-
-Returns true if user has compute permissions for every single program.
-
-* **Return type:**
-  bool
-
-### Example
-
-```py3
-program_id = client.user_id() + "/" + "program_name"
-compute_allowed = permissions.is_compute_allowed(user_client.user_id(), program_id)
-```
-
-
-
-#### is_delete_allowed(user_id)
-
-Returns true if user has delete permissions.
-
-* **Return type:**
-  bool
-
-### Example
-
-```py3
-import py_nillion_client as nillion
-
-permissions = nillion.Permissions.default_for_user(client.user_id)
-delete_allowed = permissions.is_delete_allowed(user_client.user_id)
-print("Default user is always allowed: ", delete_allowed)
-```
-
-```text
-&gt;&gt;&gt; Default user is always allowed: True
-```
-
-
-
-#### is_retrieve_allowed(user_id)
-
-Returns true if user has retrieve permissions.
-
-* **Return type:**
-  bool
-
-### Example
-
-```py3
-import py_nillion_client as nillion
-
-permissions = nillion.Permissions.default_for_user(client.user_id)
-retrieve_allowed = permissions.is_retrieve_allowed(user_client.user_id)
-print("Default user is always allowed: ", retrieve_allowed)
-```
-
-```text
-&gt;&gt;&gt; Default user is always allowed: True
-```
-
-
-
-#### is_retrieve_permissions_allowed(user_id)
-
-Checks if user is allowed to retrieve the permissions.
-
-* **Return type:**
-  bool
-
-### Example
-
-```py3
-retrieve_permissions_allowed = permissions.is_retrieve_permissions_allowed(user_client.user_id())
-```
-
-
-
-#### is_update_allowed(user_id)
-
-Returns true if user has update permissions.
-
-* **Return type:**
-  bool
-
-### Example
-
-```py3
-import py_nillion_client as nillion
-
-permissions = nillion.Permissions.default_for_user(client.user_id)
-update_allowed = permissions.is_update_allowed(user_client.user_id)
-print("Default user is always allowed: ", update_allowed)
-```
-
-```text
-&gt;&gt;&gt; Default user is always allowed: True
-```
-
-
-
-#### is_update_permissions_allowed(user_id)
-
-Checks if user is allowed to update the permissions.
-
-* **Return type:**
-  bool
-
-### Example
-
-```py3
-update_permissions_allowed = permissions.is_update_permissions_allowed(user_client.user_id())
-```
-
-
-
-### *class* py_nillion_client.PriceQuote
-
-A price quote for an operation to be run in the network.
-
-Quotes can be requested by using `NillionClient.request_price_quote()`.
-
-
-
-#### cost
-
-Gets the cost for the quoted operation in unil units.
-The payment associated for the quoted operation must
-transfer the total amount for it to be considered a valid
-payment.
-
-* **Returns:**
-  The cost for this quote.
-* **Return type:**
-  OperationCost
-
-### Example
-
-```py3
-print("Total Cost:", quote.cost.total)
-```
-
-
-
-#### expires_at
-
-Gets the expiration time for this quote in seconds
-since the unix epoch. The payment and the operation
-execution must be invoked before this deadline is
-hit, otherwise the network will reject the operation
-request.
-
-* **Returns:**
-  The expiration time for this quote.
-* **Return type:**
-  int
-
-### Example
-
-```py3
-print("Expiration time:", quote.expires_at)
-```
-
-
-
-#### nonce
-
-Gets the nonce for this quote. This nonce must be used
-as part of the payment transaction.
-
-* **Return type:**
-  bytearray
-
-### Example
-
-```py3
-print("Nonce:", quote.nonce)
-```
-
-
-
-### *class* py_nillion_client.ProgramBindings(program_id)
-
-This is a `ProgramBindings` class used to
-bind compute parties to explicit peer IDs (provided
-by the `NillionClient.party_id()`). Bindings
-need to be set to use secrets in programs
-
-This class is used by the `NillionClient.store_values()`
-and `NillionClient.compute()` methods.
-
-* **Parameters:**
-  **program_id** (*str*) – The identifier of the program to bind to.
-* **Returns:**
-  An instance of `ProgramBindings`.
-* **Return type:**
-  ProgramBindings
-
-### Example
-
-```py3
-import py_nillion_client as nillion
-
-# program_id looks like: "/"
-bindings = nillion.ProgramBindings(args.program_id)
-
-# Add bindings when storing a secret
-bindings.add_input_party("InputPartyName", client.party_id)
-secrets = nillion.Secrets({"fortytwo": nillion.SecretInteger(42)})
-store_id = await client.store_values(
-    cluster_id, bindings, secrets, None
-)
-
-# Add bindings for compute action
-bindings = nillion.ProgramBindings(args.program_id)
-bindings.add_input_party("InputPartyName" client.party_id)
-bindings.add_output_party("OutputPartyName", client.party_id)
-```
-
-
-
-#### add_input_party(name, id)
-
-Bind an input party with a name to a specific program.
-
-* **Parameters:**
-  * **name** (*str*) – The logical name of the input party in the Nada program.
-  * **id** (*str*) – The party identifier.
-
-### Example
-
-```py3
-bindings = nillion.ProgramBindings(args.program_id)
-bindings.add_input_party("InputPartyName" client.party_id)
-```
-
-
-
-#### add_output_party(name, id)
-
-Bind an output party with a name to a specific program.
-
-* **Parameters:**
-  * **name** (*str*) – The name of the output party in the Nada program.
-  * **id** (*str*) – The party identifier.
-
-### Example
-
-```py3
-bindings = nillion.ProgramBindings(args.program_id)
-bindings.add_output_party("OutputPartyName", client.party_id)
-```
-
-
-
-### *exception* py_nillion_client.ProgramError
-
-Program not found or invalid
-
-
-
-#### args
-
-
-
-#### with_traceback()
-
-Exception.with_traceback(tb) –
-set self._\_traceback_\_ to tb and return self.
-
-
-
-### *exception* py_nillion_client.ResultError
-
-Errors related to fetching computation results
-
-
-
-#### args
-
-
-
-#### with_traceback()
-
-Exception.with_traceback(tb) –
-set self._\_traceback_\_ to tb and return self.
-
-
-
-### *class* py_nillion_client.SecretBlob(value)
-
-This is a `SecretBlob` class used to
+This is a [`EcdsaDigestMessage`](#nillion_client.EcdsaDigestMessage) class used to
 encode a secret as a blob.
-
-Note: \_\_eq_\_ method is implemented to allow comparing two blobs.
 
 * **Parameters:**
   **value** (*bytearray*) – Value of the secret blob as a bytearray.
 * **Returns:**
-  Instance of the `SecretBlob` class.
+  Instance of the [`EcdsaDigestMessage`](#nillion_client.EcdsaDigestMessage) class.
 * **Return type:**
-  SecretBlob
+  [EcdsaDigestMessage](#nillion_client.EcdsaDigestMessage)
 * **Raises:**
   **VTypeError** – argument ‘value’: Raises an error when a non-bytearray object is provided.
 
@@ -2122,23 +119,23 @@ Note: \_\_eq_\_ method is implemented to allow comparing two blobs.
 import py_nillion_client as nillion
 
 gm_blob_ba = bytearray("gm, builder!", "utf-8")
-gm_blob = py_nillion_client.SecretBlob(gm_blob_ba)
+gm_blob = nillion.EcdsaDigestMessage(gm_blob_ba)
 ready_blob_ba = bytearray("ready to build!", "utf-8")
-ready_blob = py_nillion_client.SecretBlob(ready_blob_ba)
+ready_blob = nillion.EcdsaDigestMessage(ready_blob_ba)
 
 print("Are these blobs the same?", gm_blob == ready_blob)
 ```
 
 ```text
-&gt;&gt;&gt; Are these blobs the same?  False
+>>> Are these blobs the same?  False
 ```
 
-
+<a id="nillion_client.EcdsaDigestMessage.value"></a>
 
 #### value
 
 Getter and setter for the value inside a
-`SecretBlob` instance.
+[`EcdsaDigestMessage`](#nillion_client.EcdsaDigestMessage) instance.
 
 * **Returns:**
   The value of the secret blob.
@@ -2149,7 +146,7 @@ Getter and setter for the value inside a
 
 ```py3
 gm_blob_ba = bytearray("gm, builder!", "utf-8")
-blob = nillion.SecretBlob(gm_blob_ba)
+blob = nillion.EcdsaDigestMessage(gm_blob_ba)
 print("Blob is: ", blob.value)
 ready_blob_ba = bytearray("ready to build!", "utf-8")
 blob.value = ready_blob_ba
@@ -2157,290 +154,1667 @@ print("Blob is now: ", blob.value)
 ```
 
 ```text
-&gt;&gt;&gt; Blob is:  bytearray(b'gm, builder!')
-&gt;&gt;&gt; Blob is now:  bytearray(b'ready to build!')
+>>> Blob is:  bytearray(b'gm, builder!')
+>>> Blob is now:  bytearray(b'ready to build!')
 ```
 
+<a id="nillion_client.EcdsaPrivateKey"></a>
 
+### *class* nillion_client.EcdsaPrivateKey(value)
 
-### *class* py_nillion_client.SecretInteger(value)
-
-This is a `SecretInteger` class used to
-encode a secret as a integer.
-
-Note: \_\_eq_\_ method is implemented to allow comparing two integers.
+This is a [`EcdsaPrivateKey`](#nillion_client.EcdsaPrivateKey) class used to
+encode a secret bytearray as an ecdsa private key.
 
 * **Parameters:**
-  **value** (*int*) – Value of the secret encoded element.
+  **value** (*bytearray*) – Value of the private ecdsa key as a bytearray.
 * **Returns:**
-  Instance of the `SecretInteger` class.
+  Instance of the [`EcdsaPrivateKey`](#nillion_client.EcdsaPrivateKey) class.
 * **Return type:**
-  SecretInteger
-
-### Example
-
-```py3
-import py_nillion_client as nillion
-
-sec_integer_1 = nillion.SecretInteger(1)
-sec_integer_2 = nillion.SecretInteger(2)
-
-print("Are the secret integers the same? ", sec_integer_1 == sec_integer_2)
-```
-
-```text
-&gt;&gt;&gt; Are the secret integers the same?  False
-```
-
-:::warning
-Providing zero as `SecretInteger` leaks information.
-:::
-
-
-#### value
-
-Getter and setter for the value inside a
-`SecretInteger` instance.
-
-* **Returns:**
-  The value of the secret integer.
-* **Return type:**
-  int
-
-### Example
-
-```py3
-sec_integer = nillion.SecretInteger(1)
-print("Secret integer is: ", sec_integer.value)
-sec_integer.value = 2
-print("Secret integer is now: ", sec_integer.value)
-```
-
-```text
-&gt;&gt;&gt; Secret integer is:  1
-&gt;&gt;&gt; Secret integer is now:  2
-```
-
-
-
-### *class* py_nillion_client.SecretUnsignedInteger(value)
-
-This is a `SecretUnsignedInteger` class used to
-encode a secret as an unsigned integer.
-
-Note: \_\_eq_\_ method is implemented to allow
-comparing two unsigned integers.
-
-* **Parameters:**
-  **value** (*int*) – Value of the secret encoded element.
-* **Returns:**
-  Instance of the `SecretUnsignedInteger` class.
-* **Return type:**
-  SecretUnsignedInteger
+  [EcdsaPrivateKey](#nillion_client.EcdsaPrivateKey)
 * **Raises:**
-  **OverflowError** – can’t convert negative int to unsigned: Raises an error when a negative integer value is used.
+  **VTypeError** – argument ‘value’: Raises an error when a non-bytearray object is provided.
 
 ### Example
 
 ```py3
-import py_nillion_client as nillion
+from nillion_client import EcdsaPrivateKey
+import os
 
-sec_uinteger_1 = nillion.SecretUnsignedInteger(1)
-sec_uinteger_2 = nillion.SecretUnsignedInteger(2)
+pk1_bytes = bytearray(os.urandom(32))
+pk1 = EcdsaPrivateKey(pk1_bytes)
+pk2_bytes = bytearray(os.urandom(32))
+pk2 = EcdsaPrivateKey(pk2_bytes)
 
-print("Are the secret unsigned integers the same? ", sec_uinteger_1 == sec_uinteger_2)
+print("Are these ecdsa private keys the same?", pk1 == pk2)
 ```
 
 ```text
-&gt;&gt;&gt; Are the secret unsigned integers the same?  False
+>>> Are these ecdsa private keys the same?  False
 ```
 
-:::warning
-Providing zero as `SecretUnsignedInteger` leaks information.
-:::
-
+<a id="nillion_client.EcdsaPrivateKey.value"></a>
 
 #### value
 
 Getter and setter for the value inside a
-`SecretUnsignedInteger` instance.
+[`EcdsaPrivateKey`](#nillion_client.EcdsaPrivateKey) instance.
 
 * **Returns:**
-  The value of the secret unsigned integer.
+  The value of the private ecdsa key.
 * **Return type:**
   int
 
 ### Example
 
 ```py3
-sec_uinteger = nillion.SecretUnsignedInteger(1)
-print("Secret unsigned integer is: ", sec_uinteger.value)
-sec_uinteger.value = 2
-print("Secret unsigned integer is now: ", sec_uinteger.value)
+ecdas_pk_ba = bytearray(b'these are not random 32 bytes!!!')
+ecdsa_pk = EcdsaPrivateKey(ecdas_pk_ba)
+print("Ecdsa private key is: ", ecdsa_pk.value)
+ecdsa_pk_ba_prime = bytearray(b'these are good random 32 bytes!!')
+ecdsa_pk.value = ecdsa_pk_ba_prime
+print("Ecdsa private key is now: ", ecdsa_pk.value)
 ```
 
 ```text
-&gt;&gt;&gt; Secret unsigned integer is:  1
-&gt;&gt;&gt; Secret unsigned integer is now:  2
+>>> Ecdsa private key is:  bytearray(b'these are not random 32 bytes!!!')
+>>> Ecdsa private key is now:  bytearray(b'these are good random 32 bytes!!')
 ```
 
+<a id="nillion_client.EcdsaSignature"></a>
 
+### *class* nillion_client.EcdsaSignature(value)
 
-### *exception* py_nillion_client.TimeoutError
+This is a [`EcdsaSignature`](#nillion_client.EcdsaSignature) class used to
+encode a secret bytearray as an ecdsa private key.
 
-Timed out
+* **Parameters:**
+  **value** (*bytearray*) – Value of the private ecdsa key as a bytearray.
+* **Returns:**
+  Instance of the [`EcdsaSignature`](#nillion_client.EcdsaSignature) class.
+* **Return type:**
+  [EcdsaSignature](#nillion_client.EcdsaSignature)
+* **Raises:**
+  **VTypeError** – argument ‘value’: Raises an error when a non-bytearray object is provided.
 
+### Example
 
+```py3
+from nillion_client import EcdsaSignature
+import os
+
+r = bytearray(os.urandom(32))
+s = bytearray(os.urandom(32))
+sig = EcdsaSignature((r, s))
+```
+
+<a id="nillion_client.EcdsaSignature.value"></a>
+
+#### value
+
+Getter for the r inside a
+[`EcdsaSignature`](#nillion_client.EcdsaSignature) instance.
+
+* **Returns:**
+  The value of the private ecdsa key.
+* **Return type:**
+  int
+
+### Example
+
+```py3
+from nillion_client import EcdsaSignature
+import os
+
+r = bytearray(os.urandom(32))
+s = bytearray(os.urandom(32))
+signature = EcdsaSignature((r, s))
+print("Ecdsa signature is: ", signature.value)
+```
+
+<a id="nillion_client.InputPartyBinding"></a>
+
+### *class* nillion_client.InputPartyBinding(party_name, user)
+
+Represents the binding of a named input party in a program to a user id
+
+<a id="nillion_client.InputPartyBinding.from_proto"></a>
+
+#### *static* from_proto(proto)
+
+Constructs an instance from its protobuf representation
+
+* **Return type:**
+  [`InputPartyBinding`](#nillion_client.InputPartyBinding)
+
+<a id="nillion_client.InputPartyBinding.party_name"></a>
+
+#### party_name *: `str`*
+
+<a id="nillion_client.InputPartyBinding.to_proto"></a>
+
+#### to_proto()
+
+Converts an instance to its protobuf representation
+
+* **Return type:**
+  `InputPartyBinding`
+
+<a id="nillion_client.InputPartyBinding.user"></a>
+
+#### user *: [`UserId`](#nillion_client.UserId)*
+
+<a id="nillion_client.Integer"></a>
+
+### *class* nillion_client.Integer(value)
+
+This is a [`Integer`](#nillion_client.Integer) class used to
+encode a public variable value as an integer.
+
+* **Parameters:**
+  **value** (*int*) – Value of the public encoded element.
+* **Returns:**
+  Instance of the [`Integer`](#nillion_client.Integer) class.
+* **Return type:**
+  [Integer](#nillion_client.Integer)
+
+### Example
+
+```py3
+from nillion_client import Integer
+
+pub_integer_1 = Integer(1)
+pub_integer_2 = Integer(2)
+
+print("Are the public integers the same? ", pub_integer_1 == pub_integer_2)
+```
+
+```text
+>>> Are the public integers the same?  False
+```
+
+<a id="nillion_client.Integer.value"></a>
+
+#### value
+
+<a id="nillion_client.InternalError"></a>
+
+### *exception* nillion_client.InternalError
+
+Exception raised for internal errors in the library.
+
+<a id="nillion_client.InternalError.args"></a>
 
 #### args
 
-
+<a id="nillion_client.InternalError.with_traceback"></a>
 
 #### with_traceback()
 
 Exception.with_traceback(tb) –
 set self._\_traceback_\_ to tb and return self.
 
+<a id="nillion_client.Network"></a>
 
+### *class* nillion_client.Network(chain_id, chain_grpc_endpoint, nilvm_grpc_endpoint)
 
-### *class* py_nillion_client.UnsignedInteger(value)
+The network class contains network settings for the VmClient.
 
-This is a `UnsignedInteger` class used to
-encode a public variable value as an unsigned integer.
+<a id="nillion_client.Network.chain_grpc_endpoint"></a>
 
-Note: \_\_eq_\_ method is implemented to allow
-to compare two unsigned integers.
+#### chain_grpc_endpoint *: `str`*
+
+<a id="nillion_client.Network.chain_id"></a>
+
+#### chain_id *: `str`*
+
+<a id="nillion_client.Network.devnet"></a>
+
+#### *classmethod* devnet(nilvm_grpc_endpoint, chain_grpc_endpoint)
+
+Initializes a network configuration compatible with a Nillion devnet.
+
+By default the devnet starts without any SSL configuration so all of the tls_\* parameters are not required.
 
 * **Parameters:**
-  **value** (*int*) – Value of the public encoded element.
-* **Returns:**
-  Instance of the `UnsignedInteger` class.
+  * **nilvm_grpc_endpoint** (`str`) – The Nillion network bootnode endpoint.
+  * **chain_grpc_endpoint** (`str`) – The nilchain gRPC endpoint.
 * **Return type:**
-  UnsignedInteger
-* **Raises:**
-  **OverflowError** – can’t convert negative int to unsigned: Raises an error when a negative integer value is used.
+  [`Network`](#nillion_client.Network)
 
 ### Example
 
 ```py3
-import py_nillion_client as nillion
+config = Network.devnet(
+    nilvm_grpc_endpoint="http://127.0.0.1:37939",
+    chain_grpc_endpoint="localhost:26649",
+)
+```
 
-pub_uinteger_1 = nillion.UnsignedInteger(1)
-pub_uinteger_2 = nillion.UnsignedInteger(2)
+<a id="nillion_client.Network.from_config"></a>
 
-print("Are the public unsigned integers the same? ", pub_uinteger_1 == pub_uinteger_2)
+#### *classmethod* from_config(network_name)
+
+Load a network configuration from the filesystem.
+
+This looks up a network configuration under ~/.config/nillion/networks. This allows easily loading
+pre-existing network configurations, like the one dumped by nillion-devnet when it starts.
+
+* **Parameters:**
+  **network_name** (`str`) – The name of the network to be loaded.
+* **Return type:**
+  [`Network`](#nillion_client.Network)
+
+### Example
+
+```py3
+config = Network.from_config("devnet")
+```
+
+<a id="nillion_client.Network.nilvm_grpc_endpoint"></a>
+
+#### nilvm_grpc_endpoint *: `str`*
+
+<a id="nillion_client.NilChainPayer"></a>
+
+### *class* nillion_client.NilChainPayer(network, wallet_private_key, gas_limit, wallet_prefix='nillion', query_timeout_seconds=30)
+
+A payer that uses the nilchain to perform payments.
+
+<a id="nillion_client.NilChainPayer.prepare_msg"></a>
+
+#### *static* prepare_msg(resource, address, amount)
+
+Create a MsgPayFor transaction.
+
+* **Parameters:**
+  * **resource** (`bytes`) – The resource to pay for.
+  * **address** (`str`) – The address of the payment sender.
+  * **amount** (`int`) – The amount of unil that needs to be paid.
+* **Return type:**
+  `MsgPayFor`
+
+<a id="nillion_client.NilChainPayer.submit_payment"></a>
+
+#### *async* submit_payment(amount, resource, gas_limit=None)
+
+Submits a payment to the chain.
+
+This must submit a MsgPayFor transaction in nilchain using the given resource as a parameter.
+
+* **Parameters:**
+  * **amount** (`int`) – The amount of unil that needs to be paid.
+  * **resource** (`bytes`) – The resource to pay for.
+  * **gas_limit** (`Optional`[`int`]) – The gas limit to set for this operation.
+* **Return type:**
+  `str`
+
+<a id="nillion_client.NilChainPayer.wallet_address"></a>
+
+#### *property* wallet_address *: str*
+
+Get the address associated with the payer’s wallet.
+
+<a id="nillion_client.NilChainPrivateKey"></a>
+
+### nillion_client.NilChainPrivateKey
+
+alias of `PrivateKey`
+
+<a id="nillion_client.NotFoundError"></a>
+
+### *exception* nillion_client.NotFoundError
+
+Exception raised when values are not found.
+
+<a id="nillion_client.NotFoundError.args"></a>
+
+#### args
+
+<a id="nillion_client.NotFoundError.with_traceback"></a>
+
+#### with_traceback()
+
+Exception.with_traceback(tb) –
+set self._\_traceback_\_ to tb and return self.
+
+<a id="nillion_client.OutputPartyBinding"></a>
+
+### *class* nillion_client.OutputPartyBinding(party_name, users)
+
+Represents the binding of a named output party in a program to a user id
+
+<a id="nillion_client.OutputPartyBinding.from_proto"></a>
+
+#### *static* from_proto(proto)
+
+Constructs an instance from its protobuf representation
+
+* **Return type:**
+  [`OutputPartyBinding`](#nillion_client.OutputPartyBinding)
+
+<a id="nillion_client.OutputPartyBinding.party_name"></a>
+
+#### party_name *: `str`*
+
+<a id="nillion_client.OutputPartyBinding.to_proto"></a>
+
+#### to_proto()
+
+Converts an instance to its protobuf representation
+
+* **Return type:**
+  `OutputPartyBinding`
+
+<a id="nillion_client.OutputPartyBinding.users"></a>
+
+#### users *: `List`[[`UserId`](#nillion_client.UserId)]*
+
+<a id="nillion_client.Payer"></a>
+
+### *class* nillion_client.Payer
+
+An abstraction over the mechanism to perform payments for operations in the Nillion network.
+
+<a id="nillion_client.Payer.prepare_msg"></a>
+
+#### *static* prepare_msg(resource, address, amount)
+
+Create a MsgPayFor transaction.
+
+* **Parameters:**
+  * **resource** (`bytes`) – The resource to pay for.
+  * **address** (`str`) – The address of the payment sender.
+  * **amount** (`int`) – The amount of unil that needs to be paid.
+* **Return type:**
+  `MsgPayFor`
+
+<a id="nillion_client.Payer.submit_payment"></a>
+
+#### *abstract async* submit_payment(amount, resource, gas_limit=None)
+
+Submits a payment to the chain.
+
+This must submit a MsgPayFor transaction in nilchain using the given resource as a parameter.
+
+* **Parameters:**
+  * **amount** (`int`) – The amount of unil that needs to be paid.
+  * **resource** (`bytes`) – The resource to pay for.
+  * **gas_limit** (`Optional`[`int`]) – The gas limit to set for this operation.
+* **Return type:**
+  `str`
+
+<a id="nillion_client.PermissionDeniedError"></a>
+
+### *exception* nillion_client.PermissionDeniedError
+
+Exception raised a permission to run an operation has been denied.
+
+<a id="nillion_client.PermissionDeniedError.args"></a>
+
+#### args
+
+<a id="nillion_client.PermissionDeniedError.with_traceback"></a>
+
+#### with_traceback()
+
+Exception.with_traceback(tb) –
+set self._\_traceback_\_ to tb and return self.
+
+<a id="nillion_client.Permissions"></a>
+
+### *class* nillion_client.Permissions(owner, retrieve=&lt;factory&gt;, update=&lt;factory&gt;, delete=&lt;factory&gt;, compute=&lt;factory&gt;)
+
+The permissions associated with a set of stored values.
+
+<a id="nillion_client.Permissions.allow_compute"></a>
+
+#### allow_compute(user_id, program_id)
+
+Allow a user to use these values on an execution of the given program id.
+
+* **Return type:**
+  [`Permissions`](#nillion_client.Permissions)
+
+<a id="nillion_client.Permissions.allow_delete"></a>
+
+#### allow_delete(user_id)
+
+Allow a user to delete these values.
+
+* **Return type:**
+  [`Permissions`](#nillion_client.Permissions)
+
+<a id="nillion_client.Permissions.allow_retrieve"></a>
+
+#### allow_retrieve(user_id)
+
+Allow a user to retrieve these values.
+
+* **Return type:**
+  [`Permissions`](#nillion_client.Permissions)
+
+<a id="nillion_client.Permissions.allow_update"></a>
+
+#### allow_update(user_id)
+
+Allow a user to update these values.
+
+* **Return type:**
+  [`Permissions`](#nillion_client.Permissions)
+
+<a id="nillion_client.Permissions.compute"></a>
+
+#### compute *: `ComputePermissions`*
+
+<a id="nillion_client.Permissions.defaults_for_user"></a>
+
+#### *classmethod* defaults_for_user(user_id)
+
+Returns a Permissions object with update, retrieve and delete permissions for a user.
+
+* **Return type:**
+  [`Permissions`](#nillion_client.Permissions)
+
+<a id="nillion_client.Permissions.delete"></a>
+
+#### delete *: `Set`[[`UserId`](#nillion_client.UserId)]*
+
+<a id="nillion_client.Permissions.from_proto"></a>
+
+#### *classmethod* from_proto(proto)
+
+Create a Permissions instance from a ProtoPermissions message.
+
+* **Return type:**
+  [`Permissions`](#nillion_client.Permissions)
+
+<a id="nillion_client.Permissions.owner"></a>
+
+#### owner *: [`UserId`](#nillion_client.UserId)*
+
+<a id="nillion_client.Permissions.retrieve"></a>
+
+#### retrieve *: `Set`[[`UserId`](#nillion_client.UserId)]*
+
+<a id="nillion_client.Permissions.to_proto"></a>
+
+#### to_proto()
+
+Convert this Permissions instance to a ProtoPermissions message.
+
+* **Return type:**
+  `Permissions`
+
+<a id="nillion_client.Permissions.update"></a>
+
+#### update *: `Set`[[`UserId`](#nillion_client.UserId)]*
+
+<a id="nillion_client.PermissionsDelta"></a>
+
+### *class* nillion_client.PermissionsDelta(retrieve=&lt;factory&gt;, update=&lt;factory&gt;, delete=&lt;factory&gt;, compute=&lt;factory&gt;)
+
+A delta of permission grants/revokes to be applied
+
+<a id="nillion_client.PermissionsDelta.compute"></a>
+
+#### compute *: `ComputePermissionCommand`*
+
+<a id="nillion_client.PermissionsDelta.delete"></a>
+
+#### delete *: `PermissionCommand`*
+
+<a id="nillion_client.PermissionsDelta.retrieve"></a>
+
+#### retrieve *: `PermissionCommand`*
+
+<a id="nillion_client.PermissionsDelta.update"></a>
+
+#### update *: `PermissionCommand`*
+
+<a id="nillion_client.PreprocessingElement"></a>
+
+### *class* nillion_client.PreprocessingElement(value: int)
+
+A preprocessing element.
+
+<a id="nillion_client.PreprocessingElement.as_integer_ratio"></a>
+
+#### as_integer_ratio()
+
+Return integer ratio.
+
+Return a pair of integers, whose ratio is exactly equal to the original int
+and with a positive denominator.
+
+```pycon
+>>> (10).as_integer_ratio()
+(10, 1)
+>>> (-10).as_integer_ratio()
+(-10, 1)
+>>> (0).as_integer_ratio()
+(0, 1)
+```
+
+<a id="nillion_client.PreprocessingElement.bit_count"></a>
+
+#### bit_count()
+
+Number of ones in the binary representation of the absolute value of self.
+
+Also known as the population count.
+
+```pycon
+>>> bin(13)
+'0b1101'
+>>> (13).bit_count()
+3
+```
+
+<a id="nillion_client.PreprocessingElement.bit_length"></a>
+
+#### bit_length()
+
+Number of bits necessary to represent self in binary.
+
+```pycon
+>>> bin(37)
+'0b100101'
+>>> (37).bit_length()
+6
+```
+
+<a id="nillion_client.PreprocessingElement.conjugate"></a>
+
+#### conjugate()
+
+Returns self, the complex conjugate of any int.
+
+<a id="nillion_client.PreprocessingElement.denominator"></a>
+
+#### denominator
+
+the denominator of a rational number in lowest terms
+
+<a id="nillion_client.PreprocessingElement.from_bytes"></a>
+
+#### from_bytes(byteorder, \*, signed=False)
+
+Return the integer represented by the given array of bytes.
+
+bytes
+: Holds the array of bytes to convert.  The argument must either
+  support the buffer protocol or be an iterable object producing bytes.
+  Bytes and bytearray are examples of built-in objects that support the
+  buffer protocol.
+
+byteorder
+: The byte order used to represent the integer.  If byteorder is ‘big’,
+  the most significant byte is at the beginning of the byte array.  If
+  byteorder is ‘little’, the most significant byte is at the end of the
+  byte array.  To request the native byte order of the host system, use
+  <br/>
+  ```
+  `
+  ```
+  <br/>
+  sys.byteorder’ as the byte order value.
+
+signed
+: Indicates whether two’s complement is used to represent the integer.
+
+<a id="nillion_client.PreprocessingElement.from_string"></a>
+
+#### *classmethod* from_string()
+
+Return the value which corresponds to the string name.
+
+* **Parameters:**
+  **name** (`str`) – The name of the enum member to get.
+* **Raises:**
+  **ValueError** – The member was not found in the Enum.
+* **Return type:**
+  `Self`
+
+<a id="nillion_client.PreprocessingElement.imag"></a>
+
+#### imag
+
+the imaginary part of a complex number
+
+<a id="nillion_client.PreprocessingElement.name"></a>
+
+#### name *: `Optional`[`str`]*
+
+<a id="nillion_client.PreprocessingElement.numerator"></a>
+
+#### numerator
+
+the numerator of a rational number in lowest terms
+
+<a id="nillion_client.PreprocessingElement.real"></a>
+
+#### real
+
+the real part of a complex number
+
+<a id="nillion_client.PreprocessingElement.to_bytes"></a>
+
+#### to_bytes(length, byteorder, \*, signed=False)
+
+Return an array of bytes representing an integer.
+
+length
+: Length of bytes object to use.  An OverflowError is raised if the
+  integer is not representable with the given number of bytes.
+
+byteorder
+: The byte order used to represent the integer.  If byteorder is ‘big’,
+  the most significant byte is at the beginning of the byte array.  If
+  byteorder is ‘little’, the most significant byte is at the end of the
+  byte array.  To request the native byte order of the host system, use
+  <br/>
+  ```
+  `
+  ```
+  <br/>
+  sys.byteorder’ as the byte order value.
+
+signed
+: Determines whether two’s complement is used to represent the integer.
+  If signed is False and a negative integer is given, an OverflowError
+  is raised.
+
+<a id="nillion_client.PreprocessingElement.try_value"></a>
+
+#### *classmethod* try_value()
+
+Return the value which corresponds to the value.
+
+* **Parameters:**
+  **value** (`int`) – The value of the enum member to get.
+* **Returns:**
+  The corresponding member or a new instance of the enum if
+  `value` isn’t actually a member.
+* **Return type:**
+  `Enum`
+
+<a id="nillion_client.PreprocessingElement.value"></a>
+
+#### value *: `int`*
+
+<a id="nillion_client.PrivateKey"></a>
+
+### *class* nillion_client.PrivateKey(privkey=None, raw=True)
+
+<a id="nillion_client.PrivateKey.deserialize"></a>
+
+#### deserialize(privkey_ser)
+
+<a id="nillion_client.PrivateKey.ecdsa_deserialize"></a>
+
+#### ecdsa_deserialize(ser_sig)
+
+<a id="nillion_client.PrivateKey.ecdsa_deserialize_compact"></a>
+
+#### ecdsa_deserialize_compact(ser_sig)
+
+<a id="nillion_client.PrivateKey.ecdsa_recover"></a>
+
+#### ecdsa_recover(msg, recover_sig, raw=False, digest=&lt;built-in function openssl_sha256&gt;)
+
+<a id="nillion_client.PrivateKey.ecdsa_recoverable_convert"></a>
+
+#### ecdsa_recoverable_convert(recover_sig)
+
+<a id="nillion_client.PrivateKey.ecdsa_recoverable_deserialize"></a>
+
+#### ecdsa_recoverable_deserialize(ser_sig, rec_id)
+
+<a id="nillion_client.PrivateKey.ecdsa_recoverable_serialize"></a>
+
+#### ecdsa_recoverable_serialize(recover_sig)
+
+<a id="nillion_client.PrivateKey.ecdsa_serialize"></a>
+
+#### ecdsa_serialize(raw_sig)
+
+<a id="nillion_client.PrivateKey.ecdsa_serialize_compact"></a>
+
+#### ecdsa_serialize_compact(raw_sig)
+
+<a id="nillion_client.PrivateKey.ecdsa_sign"></a>
+
+#### ecdsa_sign(msg, raw=False, digest=&lt;built-in function openssl_sha256&gt;, custom_nonce=None)
+
+<a id="nillion_client.PrivateKey.ecdsa_sign_recoverable"></a>
+
+#### ecdsa_sign_recoverable(msg, raw=False, digest=&lt;built-in function openssl_sha256&gt;)
+
+<a id="nillion_client.PrivateKey.ecdsa_signature_normalize"></a>
+
+#### ecdsa_signature_normalize(raw_sig, check_only=False)
+
+Check and optionally convert a signature to a normalized lower-S form.
+If check_only is True then the normalized signature is not returned.
+
+This function always return a tuple containing a boolean (True if
+not previously normalized or False if signature was already
+normalized), and the normalized signature. When check_only is True,
+the normalized signature returned is always None.
+
+<a id="nillion_client.PrivateKey.schnorr_sign"></a>
+
+#### schnorr_sign(msg, bip340tag, raw=False)
+
+<a id="nillion_client.PrivateKey.serialize"></a>
+
+#### serialize()
+
+<a id="nillion_client.PrivateKey.set_raw_privkey"></a>
+
+#### set_raw_privkey(privkey)
+
+<a id="nillion_client.PrivateKey.tweak_add"></a>
+
+#### tweak_add(scalar)
+
+Tweak the current private key by adding a 32 byte scalar
+to it and return a new raw private key composed of 32 bytes.
+
+<a id="nillion_client.PrivateKey.tweak_mul"></a>
+
+#### tweak_mul(scalar)
+
+Tweak the current private key by multiplying it by a 32 byte scalar
+and return a new raw private key composed of 32 bytes.
+
+<a id="nillion_client.ProgramId"></a>
+
+### nillion_client.ProgramId
+
+alias of `str`
+
+<a id="nillion_client.SecretBlob"></a>
+
+### *class* nillion_client.SecretBlob(value)
+
+This is a [`SecretBlob`](#nillion_client.SecretBlob) class used to
+encode a secret as a blob.
+
+* **Parameters:**
+  **value** (*bytearray*) – Value of the secret blob as a bytearray.
+* **Returns:**
+  Instance of the [`SecretBlob`](#nillion_client.SecretBlob) class.
+* **Return type:**
+  [SecretBlob](#nillion_client.SecretBlob)
+* **Raises:**
+  **VTypeError** – argument ‘value’: Raises an error when a non-bytearray object is provided.
+
+### Example
+
+```py3
+from nillion_client import SecretBlob
+
+gm_blob_ba = bytearray("gm, builder!", "utf-8")
+gm_blob = SecretBlob(gm_blob_ba)
+ready_blob_ba = bytearray("ready to build!", "utf-8")
+ready_blob = SecretBlob(ready_blob_ba)
+
+print("Are these blobs the same?", gm_blob == ready_blob)
 ```
 
 ```text
-&gt;&gt;&gt; Are the public unsigned integers the same?  False
+>>> Are these blobs the same?  False
 ```
 
-
+<a id="nillion_client.SecretBlob.value"></a>
 
 #### value
 
 Getter and setter for the value inside a
-`UnsignedInteger` instance.
+[`SecretBlob`](#nillion_client.SecretBlob) instance.
 
 * **Returns:**
-  The value of the public unsigned integer.
+  The value of the secret blob.
 * **Return type:**
   int
 
 ### Example
 
 ```py3
-pub_uinteger = nillion.UnsignedInteger(1)
-print("Public unsigned integer is: ", pub_uinteger.value)
-pub_uinteger.value = 2
-print("Public unsigned integer is now: ", pub_uinteger.value)
+gm_blob_ba = bytearray("gm, builder!", "utf-8")
+blob = SecretBlob(gm_blob_ba)
+print("Blob is: ", blob.value)
+ready_blob_ba = bytearray("ready to build!", "utf-8")
+blob.value = ready_blob_ba
+print("Blob is now: ", blob.value)
 ```
 
 ```text
-&gt;&gt;&gt; Public unsigned integer is:  1
-&gt;&gt;&gt; Public unsigned integer is now:  2
+>>> Blob is:  bytearray(b'gm, builder!')
+>>> Blob is now:  bytearray(b'ready to build!')
 ```
 
+<a id="nillion_client.SecretBoolean"></a>
 
+### *class* nillion_client.SecretBoolean(value)
 
-### *class* py_nillion_client.UserKey
-
-This is a `UserKey` class that
-contains the public and private keys for the user.
-This class is used by `NillionClient`
-class to initialize a client.
-
-This object’s constructors can be used via the following
-class methods:
-
-1. From string encoded in Base58 (`from_base58()`);
-2. From a file (`from_file()`);
-3. From scratch (`generate()`);
-4. From seed (`seed()`).
-
-
-
-#### from_base58()
-
-Loads public and private key from base 58 encoded data.
+This is a [`SecretBoolean`](#nillion_client.SecretBoolean) class used to
+encode a secret as a boolean.
 
 * **Parameters:**
-  **contents** (*str*) – A base58 string.
+  **value** (*bool*) – Value of the secret encoded element.
+* **Returns:**
+  Instance of the [`SecretBoolean`](#nillion_client.SecretBoolean) class.
 * **Return type:**
-  UserKey
+  [SecretBoolean](#nillion_client.SecretBoolean)
 
 ### Example
 
 ```py3
-from py_nillion_client import UserKey
-user_key = UserKey.from_base58()
+from nillion_client import SecretBoolean
+
+sec_bool_1 = SecretBoolean(True)
+sec_bool_2 = SecretBoolean(False)
+
+print("Are the secret booleans the same? ", sec_bool_1 == sec_bool_2)
 ```
 
+```text
+>>> Are the secret booleans the same?  False
+```
 
+<a id="nillion_client.SecretBoolean.value"></a>
 
-#### from_file()
+#### value
 
-Loads public and private key from a file.
+<a id="nillion_client.SecretInteger"></a>
+
+### *class* nillion_client.SecretInteger(value)
+
+This is a [`SecretInteger`](#nillion_client.SecretInteger) class used to encode a secret as an integer.
 
 * **Parameters:**
-  **path** (*str*) – The filesystem path to the file containing
-  a base58 string.
+  **value** (*int*) – Value of the secret encoded element.
+* **Returns:**
+  Instance of the [`SecretInteger`](#nillion_client.SecretInteger) class.
 * **Return type:**
-  UserKey
+  [SecretInteger](#nillion_client.SecretInteger)
 
 ### Example
 
 ```py3
-from py_nillion_client import UserKey
-user_key = UserKey.from_file('/path/to/userkey.base58')
+from nillion_client import SecretInteger
+
+sec_integer_1 = SecretInteger(1)
+sec_integer_2 = SecretInteger(2)
+
+print("Are the secret integers the same? ", sec_integer_1 == sec_integer_2)
 ```
 
+```text
+>>> Are the secret integers the same?  False
+```
 
+<a id="nillion_client.SecretInteger.value"></a>
 
-#### from_seed()
+#### value
 
-Generates a public and private key from a seed.
+<a id="nillion_client.SecretUnsignedInteger"></a>
+
+### *class* nillion_client.SecretUnsignedInteger(value)
+
+This is a [`SecretUnsignedInteger`](#nillion_client.SecretUnsignedInteger) class used to
+encode a secret as an unsigned integer.
 
 * **Parameters:**
-  **seed** (*str*) – A seed string.
+  **value** (*int*) – Value of the secret encoded element.
+* **Returns:**
+  Instance of the [`SecretUnsignedInteger`](#nillion_client.SecretUnsignedInteger) class.
 * **Return type:**
-  UserKey
+  [SecretUnsignedInteger](#nillion_client.SecretUnsignedInteger)
+* **Raises:**
+  **OverflowError** – can’t convert negative int to unsigned: Raises an error when a negative integer value is used.
 
 ### Example
 
 ```py3
-from py_nillion_client import UserKey
-user_key = UserKey.from_seed('my_seed')
+from nillion_client import SecretUnsignedInteger
+
+sec_uinteger_1 = SecretUnsignedInteger(1)
+sec_uinteger_2 = SecretUnsignedInteger(2)
+
+print("Are the secret unsigned integers the same? ", sec_uinteger_1 == sec_uinteger_2)
 ```
 
+```text
+>>> Are the secret unsigned integers the same?  False
+```
 
+<a id="nillion_client.SecretUnsignedInteger.value"></a>
 
-#### generate()
+#### value
 
-Generates a random public and private key.
+<a id="nillion_client.UnsignedInteger"></a>
+
+### *class* nillion_client.UnsignedInteger(value)
+
+This is a [`UnsignedInteger`](#nillion_client.UnsignedInteger) class used to
+encode a public variable value as an unsigned integer.
+
+* **Parameters:**
+  **value** (*int*) – Value of the public encoded element.
+* **Returns:**
+  Instance of the [`UnsignedInteger`](#nillion_client.UnsignedInteger) class.
+* **Return type:**
+  [UnsignedInteger](#nillion_client.UnsignedInteger)
+* **Raises:**
+  **OverflowError** – can’t convert negative int to unsigned: Raises an error when a negative integer value is used.
+
+### Example
+
+```py3
+from nillion_client import UnsignedInteger
+
+pub_uinteger_1 = UnsignedInteger(1)
+pub_uinteger_2 = UnsignedInteger(2)
+
+print("Are the public unsigned integers the same? ", pub_uinteger_1 == pub_uinteger_2)
+```
+
+```text
+>>> Are the public unsigned integers the same?  False
+```
+
+<a id="nillion_client.UnsignedInteger.value"></a>
+
+#### value
+
+<a id="nillion_client.UserId"></a>
+
+### *class* nillion_client.UserId(contents)
+
+A user identifier.
+
+User identifiers are derived from the public key used for authentication when performing operations in the
+network. User identifiers are non sensitive and can be shared with other users.
+
+<a id="nillion_client.UserId.contents"></a>
+
+#### contents *: `bytes`*
+
+<a id="nillion_client.UserId.from_proto"></a>
+
+#### *classmethod* from_proto(proto)
+
+Create a user identifier instance from its protobuf representation.
 
 * **Return type:**
-  UserKey
+  [`UserId`](#nillion_client.UserId)
+
+<a id="nillion_client.UserId.from_public_key"></a>
+
+#### *static* from_public_key(public_key)
+
+Creates a user identifier from a public key.
+
+User identifiers are defined as the last 20 bytes of the SHA256 hash of the public key.
+
+* **Return type:**
+  [`UserId`](#nillion_client.UserId)
+* **Returns:**
+  The user id.
+
+### Example
+
+```py3
+import secp256k1
+
+private_key = secp256k1.PrivateKey()
+user = UserId.from_public_key(private_key.pubkey)
+```
+
+<a id="nillion_client.UserId.parse"></a>
+
+#### *static* parse(hex_bytes)
+
+Parse a user identifier from a hex encoded string.
+
+* **Parameters:**
+  **hex_bytes** (`str`) – The hex bytes that represent the user id.
+* **Return type:**
+  [`UserId`](#nillion_client.UserId)
+* **Returns:**
+  The parsed user id.
+
+### Example
+
+```py3
+user = UserId.parse("3113a1170de795e4b725b84d1e0b4cfd9ec58ce9")
+```
+
+<a id="nillion_client.UserId.to_proto"></a>
+
+#### to_proto()
+
+Convert a user identifier to its protobuf representation.
+
+* **Return type:**
+  `UserId`
+
+<a id="nillion_client.ValuesId"></a>
+
+### nillion_client.ValuesId
+
+alias of `UUID`
+
+<a id="nillion_client.VmClient"></a>
+
+### *class* nillion_client.VmClient(key, network, payer, \_raise_if_called=True)
+
+A class to interact with the Nillion network.
+
+This class allows performing all operations on the Nillion network, such as storing and retrieving secrets,
+uploading programs, invoking computations, etc.
+
+### Example
+
+```py3
+import os
+from nillion_client import PrivateKey, Network, NilChainPayer, NilChainPrivateKey, VmClient
+
+# The private key that will represent the identity of the user performing actions in the network.
+private_key = PrivateKey()
+
+# Load the config dumped by the `nillion-devnet` automatically on start and use it as the network.
+network = Network.from_config("devnet")
+
+# The payer that will be used to pay for operations in the network.
+nilchain_private_key = os.getenv("NILLION_NILCHAIN_KEY")
+chain_client = NilChainPayer(
+    network,
+    wallet_private_key=NilChainPrivateKey(bytes.fromhex(nilchain_private_key)),
+    gas_limit=10000000,
+)
+
+# Finally, create the client
+client = await VmClient.create(private_key, network, payer)
+```
+
+<a id="nillion_client.VmClient.close"></a>
+
+#### close()
+
+Closes the client and releases all resources associated with it.
+
+<a id="nillion_client.VmClient.cluster"></a>
+
+#### cluster *: `Cluster`*
+
+The cluster definition that this client is using.
+
+<a id="nillion_client.VmClient.compute"></a>
+
+#### compute(program_id, input_bindings, output_bindings, values, value_ids=None)
+
+Invokes a computation.
+
+This operation returns immediately as soon as all initial validations for the program invocation are performed.
+
+The results for a computation should be fetched by output parties via the
+[`VmClient.retrieve_compute_results()`](#nillion_client.VmClient.retrieve_compute_results) function.
+
+The name of the input and output parties must match the defined parties in the program being invoked.
+
+* **Parameters:**
+  * **program_id** (`str`) – The identifier of the program being invoked.
+  * **input_bindings** (`List`[[`InputPartyBinding`](#nillion_client.InputPartyBinding)]) – The list of bindings that associate input parties in the program with Nillion user identifiers.
+  * **output_bindings** (`List`[[`OutputPartyBinding`](#nillion_client.OutputPartyBinding)]) – The list of bindings that associate output parties in the program with Nillion user identifiers.
+  * **values** (`Mapping`[`str`, `Union`[[`Integer`](#nillion_client.Integer), [`SecretInteger`](#nillion_client.SecretInteger), [`SecretUnsignedInteger`](#nillion_client.SecretUnsignedInteger), [`Boolean`](#nillion_client.Boolean), [`SecretBoolean`](#nillion_client.SecretBoolean), [`SecretBlob`](#nillion_client.SecretBlob), [`Array`](#nillion_client.Array), [`UnsignedInteger`](#nillion_client.UnsignedInteger), [`EcdsaPrivateKey`](#nillion_client.EcdsaPrivateKey), [`EcdsaDigestMessage`](#nillion_client.EcdsaDigestMessage), [`EcdsaSignature`](#nillion_client.EcdsaSignature)]]) – The values to be used as compute time secrets. These values will only be used during the computation and
+    will be discarded afterwards.
+  * **value_ids** (`Optional`[`List`[`UUID`]]) – The list of value identifiers to be used as inputs to this computation.
+* **Return type:**
+  `PayableOperation`[`UUID`]
+* **Returns:**
+  An operation that once invoked will return an identifier that can be used to fetch computation
+  results via [`VmClient.retrieve_compute_results()`](#nillion_client.VmClient.retrieve_compute_results)
+
+### Example
+
+```py3
+values = {
+    "foo": SecretInteger(40),
+    "bar": SecretInteger(2),
+}
+
+# Invoke a program using the given input and output bindings. In this case we are the only party providing
+# inputs and we are the only party receiving outputs.
+compute_id = await client.compute(
+    program_id,
+    input_bindings=[
+        nillion_client.InputPartyBinding(party_name="Party1", user=client.user_id)
+    ],
+    output_bindings=[
+        nillion_client.OutputPartyBinding(
+            party_name="Party1", users=[client.user_id]
+        )
+    ],
+    values=values,
+).invoke()
+
+# Now fetch the results.
+results = await client.retrieve_compute_results(compute_id).invoke()
+```
+
+<a id="nillion_client.VmClient.create"></a>
+
+#### *async classmethod* create(key, network, payer)
+
+Create a new Nillion client.
+
+* **Parameters:**
+  * **key** ([`PrivateKey`](#nillion_client.PrivateKey)) – The private key that will represent the client’s identity in the network.
+  * **network** ([`Network`](#nillion_client.Network)) – The network the client should connect to.
+  * **payer** ([`Payer`](#nillion_client.Payer)) – The payer that will pay for all operations performed in the network.
+* **Return type:**
+  [`VmClient`](#nillion_client.VmClient)
+
+### Example
+
+```py3
+client = await VmClient.create(private_key, network, payer)
+```
+
+<a id="nillion_client.VmClient.delete_values"></a>
+
+#### delete_values(values_id)
+
+Deletes the values with the given identifier.
+
+This operation requires the user to have “delete” permissions on the given values identifier.
+
+* **Parameters:**
+  **values_id** (`UUID`) – The identifier of the uploaded values that should be deleted.
+* **Return type:**
+  `DeleteValuesOperation`
+* **Returns:**
+  An operation that once invoked will delete the stored values.
+
+### Example
+
+```py3
+await client.delete_values(values_id).invoke()
+```
+
+<a id="nillion_client.VmClient.get_payment_receipt"></a>
+
+#### *async* get_payment_receipt(signed_quote, tx_hash)
+
+Request to get a payment receipt for a paid operation.
+
+* **Parameters:**
+  * **signed_quote** (`SignedQuote`) – The quote to get a payment receipt for.
+  * **tx_hash** – The transaction hash where the payment was made.
+* **Return type:**
+  `SignedReceipt`
+* **Returns:**
+  A signed receipt that can be used to prove to all nodes that the payment was made.
+
+<a id="nillion_client.VmClient.invoke_compute"></a>
+
+#### *async* invoke_compute(receipt, input_bindings, output_bindings, values, value_ids=None)
+
+Invokes a compute operation in the network.
+
+* **Parameters:**
+  * **receipt** (`SignedReceipt`) – A receipt that proves the payment was made.
+  * **program_id** – The identifier of the program being invoked.
+  * **input_bindings** (`List`[[`InputPartyBinding`](#nillion_client.InputPartyBinding)]) – The list of bindings that associate input parties in the program with Nillion user identifiers.
+  * **output_bindings** (`List`[[`OutputPartyBinding`](#nillion_client.OutputPartyBinding)]) – The list of bindings that associate output parties in the program with Nillion user identifiers.
+  * **values** (`Mapping`[`str`, `Union`[[`Integer`](#nillion_client.Integer), [`SecretInteger`](#nillion_client.SecretInteger), [`SecretUnsignedInteger`](#nillion_client.SecretUnsignedInteger), [`Boolean`](#nillion_client.Boolean), [`SecretBoolean`](#nillion_client.SecretBoolean), [`SecretBlob`](#nillion_client.SecretBlob), [`Array`](#nillion_client.Array), [`UnsignedInteger`](#nillion_client.UnsignedInteger), [`EcdsaPrivateKey`](#nillion_client.EcdsaPrivateKey), [`EcdsaDigestMessage`](#nillion_client.EcdsaDigestMessage), [`EcdsaSignature`](#nillion_client.EcdsaSignature)]]) – The values to be used as compute time secrets. These values will only be used during the computation and
+    will be discarded afterwards.
+  * **value_ids** (`Optional`[`List`[`UUID`]]) – The list of value identifiers to be used as inputs to this computation.
+* **Return type:**
+  `UUID`
+* **Returns:**
+  An identifier for the compute operation.
+
+### Example
+
+```py3
+values = {
+    "foo": SecretInteger(40),
+    "bar": SecretInteger(2),
+}
+
+# Invoke a program using the given input and output bindings. In this case we are the only party providing
+# inputs and we are the only party receiving outputs.
+compute_id = await client.compute(
+    program_id,
+    input_bindings=[
+        nillion_client.InputPartyBinding(party_name="Party1", user=client.user_id)
+    ],
+    output_bindings=[
+        nillion_client.OutputPartyBinding(
+            party_name="Party1", users=[client.user_id]
+        )
+    ],
+    values=values,
+).invoke()
+
+# Now fetch the results.
+results = await client.retrieve_compute_results(receipt, compute_id).invoke()
+```
+
+#### NOTE
+users should use generally use [`VmClient.compute()`](#nillion_client.VmClient.compute) unless the API provided by
+that function doesn’t satisfy their use cases.
+
+<a id="nillion_client.VmClient.invoke_delete_values"></a>
+
+#### *async* invoke_delete_values(values_id)
+
+Invoke a delete values operation in the network.
+
+* **Parameters:**
+  * **receipt** – A receipt that proves the payment was made.
+  * **values_id** (`UUID`) – The identifier of the uploaded values that should be deleted.
+* **Return type:**
+  `None`
+
+### Example
+
+```py3
+await client.delete_values(receipt, values_id).invoke()
+```
+
+#### NOTE
+users should use generally use [`VmClient.delete_values()`](#nillion_client.VmClient.delete_values) unless the API provided by
+that function doesn’t satisfy their use cases.
+
+<a id="nillion_client.VmClient.invoke_overwrite_permissions"></a>
+
+#### *async* invoke_overwrite_permissions(receipt, permissions)
+
+Invokes an overwrite permissions operation for the given values id.
+
+* **Parameters:**
+  * **receipt** (`SignedReceipt`) – A receipt that proves the payment was made.
+  * **values_id** – The identifier of the uploaded values for which permissions should be updated.
+  * **permissions** ([`Permissions`](#nillion_client.Permissions)) – The permissions to be set.
+
+### Example
+
+```py3
+permissions = Permissions.default_for_user(user_id)
+await client.overwrite_permissions(receipt, values_id, permissions).invoke()
+```
+
+#### NOTE
+users should use generally use [`VmClient.overwrite_permissions()`](#nillion_client.VmClient.overwrite_permissions) unless the API provided by
+that function doesn’t satisfy their use cases.
+
+<a id="nillion_client.VmClient.invoke_pool_status"></a>
+
+#### *async* invoke_pool_status(receipt)
+
+Invokes a preprocessing pool status operation in the network.
+
+* **Parameters:**
+  * **receipt** (`SignedReceipt`) – A receipt that proves the payment was made.
+  * **note:** ( *..*) – users should use generally use [`VmClient.pool_status()`](#nillion_client.VmClient.pool_status) unless the API provided by: that function doesn’t satisfy their use cases.
+* **Return type:**
+  `List`[`PreprocessingOffsets`]
+
+<a id="nillion_client.VmClient.invoke_retrieve_compute_results"></a>
+
+#### *async* invoke_retrieve_compute_results(compute_id)
+
+Invoke a retrieve compute results operation in the network.
+
+* **Parameters:**
+  * **receipt** – A receipt that proves the payment was made.
+  * **compute_id** (`UUID`) – The identifier of the compute instance to fetch the results for.
+* **Return type:**
+  `Dict`[`str`, `Union`[[`Integer`](#nillion_client.Integer), [`SecretInteger`](#nillion_client.SecretInteger), [`SecretUnsignedInteger`](#nillion_client.SecretUnsignedInteger), [`Boolean`](#nillion_client.Boolean), [`SecretBoolean`](#nillion_client.SecretBoolean), [`SecretBlob`](#nillion_client.SecretBlob), [`Array`](#nillion_client.Array), [`UnsignedInteger`](#nillion_client.UnsignedInteger), [`EcdsaPrivateKey`](#nillion_client.EcdsaPrivateKey), [`EcdsaDigestMessage`](#nillion_client.EcdsaDigestMessage), [`EcdsaSignature`](#nillion_client.EcdsaSignature)]]
+* **Returns:**
+  The result of the computation.
+
+### Example
+
+```py3
+results = await client.retrieve_compute_results(receipt, compute_id).invoke()
+```
+
+#### NOTE
+users should use generally use [`VmClient.retrieve_compute_results()`](#nillion_client.VmClient.retrieve_compute_results) unless the API provided by
+that function doesn’t satisfy their use cases.
+
+<a id="nillion_client.VmClient.invoke_retrieve_permissions"></a>
+
+#### *async* invoke_retrieve_permissions(receipt)
+
+Invokes a retrieve permissions operation in the network.
+
+* **Parameters:**
+  * **receipt** (`SignedReceipt`) – A receipt that proves the payment was made.
+  * **values_id** – The identifier of the uploaded values for which permissions should be retrieved.
+* **Return type:**
+  [`Permissions`](#nillion_client.Permissions)
+* **Returns:**
+  The set of permissions currently associated with the values.
+
+### Example
+
+```py3
+await client.retrieve_permissions(receipt, values_id).invoke()
+```
+
+#### NOTE
+users should use generally use [`VmClient.retrieve_permissions()`](#nillion_client.VmClient.retrieve_permissions) unless the API provided by
+that function doesn’t satisfy their use cases.
+
+<a id="nillion_client.VmClient.invoke_retrieve_values"></a>
+
+#### *async* invoke_retrieve_values(receipt)
+
+Invokes a retrieve values operation.
+
+* **Parameters:**
+  * **receipt** (`SignedReceipt`) – A receipt that proves the payment was made.
+  * **values_id** – The identifier of the uploaded values that should be retrieved.
+* **Return type:**
+  `Dict`[`str`, `Union`[[`Integer`](#nillion_client.Integer), [`SecretInteger`](#nillion_client.SecretInteger), [`SecretUnsignedInteger`](#nillion_client.SecretUnsignedInteger), [`Boolean`](#nillion_client.Boolean), [`SecretBoolean`](#nillion_client.SecretBoolean), [`SecretBlob`](#nillion_client.SecretBlob), [`Array`](#nillion_client.Array), [`UnsignedInteger`](#nillion_client.UnsignedInteger), [`EcdsaPrivateKey`](#nillion_client.EcdsaPrivateKey), [`EcdsaDigestMessage`](#nillion_client.EcdsaDigestMessage), [`EcdsaSignature`](#nillion_client.EcdsaSignature)]]
+* **Returns:**
+  The stored values.
+
+### Example
+
+```py3
+await client.retrieve_values(receipt, values_id).invoke()
+```
+
+#### NOTE
+users should use generally use [`VmClient.retrieve_values()`](#nillion_client.VmClient.retrieve_values) unless the API provided by
+that function doesn’t satisfy their use cases.
+
+<a id="nillion_client.VmClient.invoke_store_program"></a>
+
+#### *async* invoke_store_program(receipt, program)
+
+Invokes a store program operation in the network.
+
+* **Parameters:**
+  * **receipt** (`SignedReceipt`) – A receipt that proves the payment was made.
+  * **program_name** – The name of the program being uploaded.
+  * **program** (`bytes`) – The contents of the .nada.bin file generated from an invocation to pynadac.
+* **Return type:**
+  `str`
+* **Returns:**
+  The stored program’s identifier.
+
+### Example
+
+```py3
+contents = open("/tmp/program.nada.bin", "rb").read()
+await client.store_program(receipt, program_name="my-test-program", program=contents).invoke()
+```
+
+#### NOTE
+users should use generally use [`VmClient.store_program()`](#nillion_client.VmClient.store_program) unless the API provided by
+that function doesn’t satisfy their use cases.
+
+<a id="nillion_client.VmClient.invoke_store_values"></a>
+
+#### *async* invoke_store_values(receipt, values, permissions=None, update_identifier=None)
+
+Invoke a store values operation in the network.
+
+* **Parameters:**
+  * **receipt** (`SignedReceipt`) – A receipt that proves the payment was made.
+  * **values** (`Mapping`[`str`, `Union`[[`Integer`](#nillion_client.Integer), [`SecretInteger`](#nillion_client.SecretInteger), [`SecretUnsignedInteger`](#nillion_client.SecretUnsignedInteger), [`Boolean`](#nillion_client.Boolean), [`SecretBoolean`](#nillion_client.SecretBoolean), [`SecretBlob`](#nillion_client.SecretBlob), [`Array`](#nillion_client.Array), [`UnsignedInteger`](#nillion_client.UnsignedInteger), [`EcdsaPrivateKey`](#nillion_client.EcdsaPrivateKey), [`EcdsaDigestMessage`](#nillion_client.EcdsaDigestMessage), [`EcdsaSignature`](#nillion_client.EcdsaSignature)]]) – The values to store.
+  * **ttl_days** – The number of days after which the values should be deleted. The higher this value, the higher the
+    operation cost will be.
+  * **permissions** (`Optional`[[`Permissions`](#nillion_client.Permissions)]) – The permissions to be set for the uploaded values. By default only the uploader will have read and update
+    permissions.
+  * **update_identifier** (`Optional`[`UUID`]) – An identifier of the secret to be updated. If set, this turns this operation into an update.
+* **Return type:**
+  `UUID`
+* **Returns:**
+  The identifier for the uploaded values.
+
+### Example
+
+```py3
+values = {
+    "foo": SecretInteger(42),
+    "bar": Integer(1337),
+}
+await client.store_values(receipt, values, ttl_days=1).invoke()
+```
+
+#### NOTE
+users should use generally use [`VmClient.store_values()`](#nillion_client.VmClient.store_values) unless the API provided by that function
+doesn’t satisfy their use cases.
+
+<a id="nillion_client.VmClient.invoke_update_permissions"></a>
+
+#### *async* invoke_update_permissions(receipt, delta)
+
+Invokes an updates the permissions on the given values.
+
+* **Parameters:**
+  * **receipt** (`SignedReceipt`) – A receipt that proves the payment was made.
+  * **values_id** – The identifier of the uploaded values for which permissions should be updated.
+  * **delta** ([`PermissionsDelta`](#nillion_client.PermissionsDelta)) – The permissions to be granted and revoked.
+
+### Example
+
+```py3
+# Grant permissions to retrieve these values to `other_user_id`.
+delta = PermissionsDelta(retrieve=PermissionCommand(grant=set([other_user_id])))
+await client.update_permissions(receipt, values_id, delta).invoke()
+```
+
+#### NOTE
+users should use generally use [`VmClient.update_permissions()`](#nillion_client.VmClient.update_permissions) unless the API provided by
+that function doesn’t satisfy their use cases.
+
+<a id="nillion_client.VmClient.network"></a>
+
+#### network *: [`Network`](#nillion_client.Network)*
+
+The network used by this client.
+
+<a id="nillion_client.VmClient.overwrite_permissions"></a>
+
+#### overwrite_permissions(values_id, permissions)
+
+Overwrites the permissions on the given values id.
+
+This operation requires the user to have “update” permissions on the given values identifier.
+
+* **Parameters:**
+  * **values_id** (`UUID`) – The identifier of the uploaded values for which permissions should be updated.
+  * **permissions** ([`Permissions`](#nillion_client.Permissions)) – The permissions to be set.
+* **Return type:**
+  An operation that once invoked will overwrite the permissions for the given values.
+
+### Example
+
+```py3
+permissions = Permissions.default_for_user(user_id)
+await client.overwrite_permissions(values_id, permissions).invoke()
+```
+
+<a id="nillion_client.VmClient.pool_status"></a>
+
+#### pool_status()
+
+Fetch the preprocessing pool status.
+
+* **Return type:**
+  `PayableOperation`[`List`[`PreprocessingOffsets`]]
+* **Returns:**
+  The available offsets for every preprocessing element.
+
+### Example
+
+```py3
+offsets = await client.pool_status(compute_id)
+```
+
+<a id="nillion_client.VmClient.request_quote"></a>
+
+#### *async* request_quote(operation)
+
+Requests a quote for an operation.
+
+Users should generally not use this function directly and should instead use the concrete function
+for the action they’re trying to perform, such as [`VmClient.store_values()`](#nillion_client.VmClient.store_values),
+
+* **Return type:**
+  `SignedQuote`
+
+<a id="nillion_client.VmClient.retrieve_compute_results"></a>
+
+#### retrieve_compute_results(compute_id)
+
+Retrieve the results of a compute operation.
+
+If the compute operation has finished, this will return the result immediately. If the operation is still
+ongoing, this will block until the operation finishes.
+
+The invoker user must have been set as an output binding in the [`VmClient.compute()`](#nillion_client.VmClient.compute) invocation. If the
+invoker was bound as an output party, it will only retrieve the subset of the outputs that belong to it
+based on the configured bindings.
+
+* **Parameters:**
+  **compute_id** (`UUID`) – The identifier of the compute instance to fetch the results for.
+* **Return type:**
+  `RetrieveComputeResultsOperation`
+* **Returns:**
+  An operation that once invoked will return the result of the computation.
+
+### Example
+
+```py3
+results = await client.retrieve_compute_results(compute_id).invoke()
+```
+
+<a id="nillion_client.VmClient.retrieve_permissions"></a>
+
+#### retrieve_permissions(values_id)
+
+Retrieves the permissions for the given values identifier.
+
+This operation requires the user to have “retrieve” permissions on the given values identifier.
+
+* **Parameters:**
+  **values_id** (`UUID`) – The identifier of the uploaded values for which permissions should be retrieved.
+* **Return type:**
+  `PayableOperation`[[`Permissions`](#nillion_client.Permissions)]
+* **Returns:**
+  An operation that once invoked will retrieve the set of permissions currently associated with the values.
+
+### Example
+
+```py3
+await client.retrieve_permissions(values_id).invoke()
+```
+
+<a id="nillion_client.VmClient.retrieve_values"></a>
+
+#### retrieve_values(values_id)
+
+Retrieves the values with the given identifier, performing unmasking to recover any secrets
+in the given set of values.
+
+This operation requires the user to have “retrieve” permissions on the given values identifier.
+
+* **Parameters:**
+  **values_id** (`UUID`) – The identifier of the uploaded values that should be retrieved.
+* **Return type:**
+  `PayableOperation`[`Dict`[`str`, `Union`[[`Integer`](#nillion_client.Integer), [`SecretInteger`](#nillion_client.SecretInteger), [`SecretUnsignedInteger`](#nillion_client.SecretUnsignedInteger), [`Boolean`](#nillion_client.Boolean), [`SecretBoolean`](#nillion_client.SecretBoolean), [`SecretBlob`](#nillion_client.SecretBlob), [`Array`](#nillion_client.Array), [`UnsignedInteger`](#nillion_client.UnsignedInteger), [`EcdsaPrivateKey`](#nillion_client.EcdsaPrivateKey), [`EcdsaDigestMessage`](#nillion_client.EcdsaDigestMessage), [`EcdsaSignature`](#nillion_client.EcdsaSignature)]]]
+* **Returns:**
+  An operation that once invoked will retrieve the stored values.
+
+### Example
+
+```py3
+await client.retrieve_values(values_id).invoke()
+```
+
+<a id="nillion_client.VmClient.store_program"></a>
+
+#### store_program(program_name, program)
+
+Stores a program in the network.
+
+Stored programs can by default be invoked by anyone, although their identifier is only known to the invoker
+and node operators.
+
+* **Parameters:**
+  * **program_name** (`str`) – The name of the program being uploaded.
+  * **program** (`bytes`) – The contents of the .nada.bin file generated from an invocation to pynadac.
+* **Return type:**
+  `PayableOperation`[`str`]
+* **Returns:**
+  An operation that once invoked will return an identifier that can be used to reference this program
+  in invocations to compute and when setting up values permissions for compute operations.
+
+### Example
+
+```py3
+contents = open("/tmp/program.nada.bin", "rb").read()
+await client.store_program(program_name="my-test-program", program=contents).invoke()
+```
+
+<a id="nillion_client.VmClient.store_values"></a>
+
+#### store_values(values, ttl_days, permissions=None, update_identifier=None)
+
+Store a set of values in the network.
+
+Any secret values will be masked automatically before uploading them.
+
+* **Parameters:**
+  * **values** (`Mapping`[`str`, `Union`[[`Integer`](#nillion_client.Integer), [`SecretInteger`](#nillion_client.SecretInteger), [`SecretUnsignedInteger`](#nillion_client.SecretUnsignedInteger), [`Boolean`](#nillion_client.Boolean), [`SecretBoolean`](#nillion_client.SecretBoolean), [`SecretBlob`](#nillion_client.SecretBlob), [`Array`](#nillion_client.Array), [`UnsignedInteger`](#nillion_client.UnsignedInteger), [`EcdsaPrivateKey`](#nillion_client.EcdsaPrivateKey), [`EcdsaDigestMessage`](#nillion_client.EcdsaDigestMessage), [`EcdsaSignature`](#nillion_client.EcdsaSignature)]]) – The values to store.
+  * **ttl_days** (`int`) – The number of days after which the values should be deleted. The higher this value, the higher the
+    operation cost will be.
+  * **permissions** (`Optional`[[`Permissions`](#nillion_client.Permissions)]) – The permissions to be set for the uploaded values. By default only the uploader will have read and update
+    permissions.
+  * **update_identifier** (`Optional`[`UUID`]) – An identifier of the secret to be updated. If set, this turns this operation into an update.
+* **Return type:**
+  `PayableOperation`[`UUID`]
+* **Returns:**
+  An operation that once invoked returns an identifier that uniquely identifies the uploaded values.
+
+### Example
+
+```py3
+values = {
+    "foo": SecretInteger(42),
+    "bar": Integer(1337),
+}
+await client.store_values(values, ttl_days=1).invoke()
+```
+
+<a id="nillion_client.VmClient.update_permissions"></a>
+
+#### update_permissions(values_id, delta)
+
+Updates the permissions on the given values id with the given delta. As opposed to
+[`VmClient.overwrite_permissions()`](#nillion_client.VmClient.overwrite_permissions), this operation allows granting and revoking individual permissions
+without overwriting the entire set.
+
+This operation can only be invoked by the owner of the stored values.
+
+* **Parameters:**
+  * **values_id** (`UUID`) – The identifier of the uploaded values for which permissions should be updated.
+  * **delta** ([`PermissionsDelta`](#nillion_client.PermissionsDelta)) – The permissions to be granted and revoked.
+* **Return type:**
+  An operation that once invoked will update the permissions for the given values.
 
 ### Example
 

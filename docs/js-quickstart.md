@@ -254,7 +254,7 @@ def nada_main():
 </TabItem>
 
 <TabItem value="compute" label="ComputePage.tsx" >
-```ts reference showGithubLink
+```tsx reference showGithubLink
 https://github.com/NillionNetwork/cra-nillion/blob/main/src/ComputePage.tsx
 ````
 
@@ -285,7 +285,7 @@ Now your cra-nillion app can use the nada program and the nada program binaries 
 
 3. Update programName to `secret_addition` so the cra-nillion repo reads your Nada program.
 
-```ts reference showGithubLink
+```tsx reference showGithubLink
 https://github.com/NillionNetwork/cra-nillion/blob/main/src/ComputePage.tsx#L13
 ```
 
