@@ -6,15 +6,30 @@ A Nillion Network user has a [Ed25519 key pair](https://cryptography.io/en/lates
 
 #### User Key
 
-The `user_key` is the user's private key. The user key should never be shared publicly, as it unlocks access and permissions to secrets stored on the network.
+The `user_key` is the user's private key. The user key should never be shared publicly, as it unlocks access and permissions to secrets stored on the network. Best practices for securing your user key include:
+
+- Store it in a secure key management system
+- Never share it via email or messaging
+- Use strong encryption when storing it
+- Rotate keys periodically
+- Back up keys securely
 
 #### User ID
 
-The `user_id` is derived from the user's public key, and is the public user identifier. Other parties can grant a user permission to a secret based on their user id.&#x20;
+The `user_id` is derived from the user's public key, and is the public user identifier. Other parties can grant a user permission to a secret based on their user id.
 
 ### Programs
 
-A Nada program is also a piece of software that is written in Nada language, then compiled to generate a mid-level intermediate (MIR) representation of the program that can be stored in the Nillion Network for future use. Programs are characterized by a set of inputs, the computation logic, and a set of outputs. Programs are reusable, and computation is invoked by a Nillion Client. At computation time, the client specifies inputs, which can be any combination of Secrets already stored in the network, secrets provided at compute time, and public variables.
+A Nada program is software written in the Nada language that is compiled to generate a mid-level intermediate (MIR) representation. This MIR can be stored in the Nillion Network for future use. Programs are characterized by:
+
+- A set of inputs
+- Computation logic
+- A set of outputs
+
+Programs are reusable, and computation is invoked by a Nillion Client. At computation time, the client specifies inputs, which can be any combination of:
+- Secrets already stored in the network
+- Secrets provided at compute time
+- Public variables
 
 #### Program ID
 
@@ -104,3 +119,23 @@ Compute nodes can perform all the functions of the Nillion Network including com
 #### Relay servers
 
 Because dealer and result nodes can run anywhere (web browsers, other platforms), compute nodes are configured as relay servers with [libp2p's Circuit Relay protocol](https://github.com/libp2p/specs/blob/master/relay/circuit-v2.md). Dealers and result nodes can establish relay circuits with relay servers in order to operate in the network the same as the rest of the nodes.
+
+### Best Practices
+
+#### Security
+- Regularly audit permissions granted to users
+- Follow the principle of least privilege when granting access
+- Monitor and log all access to sensitive data
+- Implement proper key rotation policies
+
+#### Program Development
+- Test programs thoroughly before deployment
+- Document program inputs and outputs clearly
+- Version control your programs
+- Follow Nada language best practices
+
+#### Network Usage
+- Monitor cluster health and performance
+- Implement proper error handling
+- Use appropriate timeout values
+- Follow network upgrade procedures
