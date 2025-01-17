@@ -168,7 +168,7 @@ components:
                   - $ref: '#/components/schemas/QueryVariable'
                   - $ref: '#/components/schemas/QueryArrayVariable'
             pipeline:
-              description: An query's execution pipline defined as an array of objects
+              description: An query's execution pipeline defined as an array of objects
               type: array
               items:
                 type: object
