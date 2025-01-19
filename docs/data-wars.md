@@ -2,7 +2,7 @@
 
 This is not the allowlist you are looking for. Join the multi-week [Nillion bootcamp](https://zealy.io/cw/nillion) to be fully onboarded into the Nil Army. Every week you will have the potential to be whitelisted for the upcoming Nillion Blindfolded PFP NFT release.
 
-![An image from the static](/img/data-wars.png)
+![An image from the static](/static/img/data-wars.png)
 
 A rebellion is brewing in the shadows. The Data War draft is now OPEN.
 
@@ -16,7 +16,7 @@ Rewards and glory await those who excel.
 
 The most important aspect of being a fighter in the Nillion army is spreading the word creatively by communicating and connecting with other data fighters.
 
-We have two main groups for chatting - the [Discord](https://discord.com/invite/nillionnetwork) and the Telegram.
+We have two main groups for chatting - the [Discord](https://discord.com/invite/nillionnetwork) and the [Telegram](https://t.me/nillionnetwork).
 
 At Nillion, everything needs to be high quality, including our communications. Picture this: every conversation you have within the community serves as a welcoming handshake for new members. So if you’re having engaging, interesting, high quality conversations, we will attract more interesting people to join our cause and get involved.
 
