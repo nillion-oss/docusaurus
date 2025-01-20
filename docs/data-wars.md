@@ -32,7 +32,7 @@ If you have special interests or post in channels about trading, tech, NFTs, DeF
 
 If you do any of these really well and the community recommends you, then the “Berserker” role will be granted.
 
-If you’re an integral member of the community, then you’ll be awarded the highest rank: The Marshal class. This rank grants access to the exclusive Marshall channel.
+If you’re an integral member of the community, then you’ll be awarded the highest rank: The Marshal class. This rank grants access to the exclusive Marshal channel.
 
 Remember! Community isn't just in Discord and Telegram
 

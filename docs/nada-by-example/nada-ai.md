@@ -7,7 +7,7 @@ Nada-AI is a Python library designed for AI/ML on top of Nada DSL and Nillion Ne
 To learn more about the library, check out the full [Nada-AI docs here](/nada-ai-introduction).
 
 :::warning
-If you are looking for Nillion AIVM, to run secure inference platform for Deep Learning models, visit [here.](../aivm.md)
+If you are looking for Nillion AIVM, to run a secure inference platform for Deep Learning models, visit [here.](../aivm.md)
 
 Nada is for building on top of Nada DSL and Nillion Network.
 :::
