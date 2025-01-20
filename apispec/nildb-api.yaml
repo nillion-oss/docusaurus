@@ -168,7 +168,7 @@ components:
                   - $ref: '#/components/schemas/QueryVariable'
                   - $ref: '#/components/schemas/QueryArrayVariable'
             pipeline:
-              description: An query's execution pipline defined as an array of objects
+              description: An query's execution pipeline defined as an array of objects
               type: array
               items:
                 type: object
@@ -431,7 +431,7 @@ paths:
                   $ref: '#/components/schemas/Filter'
       responses:
         '200':
-          description: Data documents that match the provided filter. Pagenation is not supported.
+          description: Data documents that match the provided filter. Pagination is not supported.
           content:
             application/json:
               schema:
