@@ -42,7 +42,25 @@ const buildSidebar = [
       type: 'doc',
       id: 'build/secretLlm/overview',
     },
-    items: [],
+    items: [
+      {
+        type: 'doc',
+        label: 'Overview',
+        id: 'build/secretLlm/overview',
+      },
+      'build/secretLlm/access',
+      'build/secretLlm/usage',
+      {
+        type: 'doc',
+        label: 'API Reference',
+        id: 'api/nilai/overview',
+      },
+      {
+        type: 'link',
+        label: 'Examples',
+        href: 'https://github.com/NillionNetwork/blind-module-examples/tree/main/nilai',
+      },
+    ],
   },
   {
     type: 'category',

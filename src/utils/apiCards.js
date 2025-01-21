@@ -5,4 +5,10 @@ export const apiCards = [
     icon: '🔐',
     href: './nildb/overview',
   },
+  {
+    title: 'nilAI',
+    description: `XXXX`,
+    icon: '🔐',
+    href: './nilai/overview',
+  },
 ];

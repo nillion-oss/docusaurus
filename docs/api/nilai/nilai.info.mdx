@@ -1,0 +1,136 @@
+---
+id: nilai
+title: "NilAI"
+description: "An AI model serving platform powered by secure, confidential computing."
+sidebar_label: Introduction
+sidebar_position: 0
+hide_title: true
+custom_edit_url: null
+---
+
+import ApiLogo from "@theme/ApiLogo";
+import Heading from "@theme/Heading";
+import SchemaTabs from "@theme/SchemaTabs";
+import TabItem from "@theme/TabItem";
+import Export from "@theme/ApiExplorer/Export";
+
+<span
+  className={"theme-doc-version-badge badge badge--secondary"}
+  children={"Version: 0.1.0"}
+>
+</span>
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"NilAI"}
+>
+</Heading>
+
+
+
+
+An AI model serving platform powered by secure, confidential computing.
+
+## Easy API Client Generation
+
+Want to use our API in your project? Great news! You can automatically generate a client library in just a few simple steps.
+
+### For Python Developers
+```bash
+# Install the OpenAPI generator
+pip install openapi-generator-cli
+
+# Generate your Python client
+openapi-generator-cli generate -i https://nilai.sandbox.nilogy.xyz/openapi.json -g python -o ./python-client
+```
+
+### For JavaScript/TypeScript Developers
+```bash
+# Install the OpenAPI generator
+npm install @openapitools/openapi-generator-cli -g
+
+# Generate your TypeScript client
+openapi-generator-cli generate -i https://nilai.sandbox.nilogy.xyz/openapi.json -o ./typescript-client
+```
+
+After generating, you'll have a fully functional client library that makes it easy to interact with our AI services. No more manual API request handling!
+
+
+<div
+  style={{"marginBottom":"2rem"}}
+>
+  <Heading
+    id={"authentication"}
+    as={"h2"}
+    className={"openapi-tabs__heading"}
+    children={"Authentication"}
+  >
+  </Heading><SchemaTabs
+    className={"openapi-tabs__security-schemes"}
+  >
+    <TabItem
+      label={"HTTP: Bearer Auth"}
+      value={"HTTPBearer"}
+    >
+      
+      
+      
+      
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <th>
+                Security Scheme Type:
+              </th><td>
+                http
+              </td>
+            </tr><tr>
+              <th>
+                HTTP Authorization Scheme:
+              </th><td>
+                bearer
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </TabItem>
+  </SchemaTabs>
+</div><div
+  style={{"display":"flex","flexDirection":"column","marginBottom":"var(--ifm-paragraph-margin-bottom)"}}
+>
+  <h3
+    style={{"marginBottom":"0.25rem"}}
+  >
+    Contact
+  </h3><span>
+    Nillion AI Support: [jose.cabrero@nillion.com](mailto:jose.cabrero@nillion.com)
+  </span>
+</div><div
+  style={{"marginBottom":"var(--ifm-paragraph-margin-bottom)"}}
+>
+  <h3
+    style={{"marginBottom":"0.25rem"}}
+  >
+    Terms of Service
+  </h3><a
+    href={"https://nillion.com"}
+  >
+    https://nillion.com
+  </a>
+</div><div
+  style={{"marginBottom":"var(--ifm-paragraph-margin-bottom)"}}
+>
+  <h3
+    style={{"marginBottom":"0.25rem"}}
+  >
+    License
+  </h3><a
+    href={"https://www.apache.org/licenses/LICENSE-2.0"}
+  >
+    Apache 2.0
+  </a>
+</div>
+      

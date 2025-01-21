@@ -251,12 +251,11 @@ const config = {
             outputDir: 'docs/api/nildb',
             sidebarOptions: { groupPathsBy: 'tag' },
           },
-          // Placeholder: for future APIs
-          // testAPI: {
-          //   specPath: 'apispec/test.yaml',
-          //   outputDir: 'docs/fakeapi/api',
-          //   sidebarOptions: { groupPathsBy: 'tag' },
-          // },
+          nilaiapi: {
+            specPath: 'apispec/nilai-api.yaml',
+            outputDir: 'docs/api/nilai',
+            sidebarOptions: { groupPathsBy: 'tag' },
+          },
         },
       },
     ],

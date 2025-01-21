@@ -1,0 +1,434 @@
+---
+openapi: 3.0.0
+info:
+  title: NilAI
+  description: |2
+
+    An AI model serving platform powered by secure, confidential computing.
+
+    ## Easy API Client Generation
+
+    Want to use our API in your project? Great news! You can automatically generate a client library in just a few simple steps.
+
+    ### For Python Developers
+    ```bash
+    # Install the OpenAPI generator
+    pip install openapi-generator-cli
+
+    # Generate your Python client
+    openapi-generator-cli generate -i https://nilai.sandbox.nilogy.xyz/openapi.json -g python -o ./python-client
+    ```
+
+    ### For JavaScript/TypeScript Developers
+    ```bash
+    # Install the OpenAPI generator
+    npm install @openapitools/openapi-generator-cli -g
+
+    # Generate your TypeScript client
+    openapi-generator-cli generate -i https://nilai.sandbox.nilogy.xyz/openapi.json -o ./typescript-client
+    ```
+
+    After generating, you'll have a fully functional client library that makes it easy to interact with our AI services. No more manual API request handling!
+  termsOfService: https://nillion.com
+  contact:
+    name: Nillion AI Support
+    email: jose.cabrero@nillion.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 0.1.0
+
+servers:
+  - url: https://nilai.sandbox.nilogy.xyz
+    description: Sandbox environment
+
+paths:
+  '/v1/health':
+    get:
+      tags:
+        - Health
+      summary: Health Check
+      description: |-
+        Perform a system health check.
+
+        - **Returns**: Current system health status and uptime
+
+        ### Health Check Details
+        - Provides a quick verification of system operational status
+        - Reports current system uptime
+
+        ### Status Indicators
+        - `status`: Indicates system operational condition
+          - `"ok"`: System is functioning normally
+        - `uptime`: Duration the system has been running
+
+        ### Example
+        ```python
+        # Retrieve system health status
+        health = await health_check()
+        # Expect: HealthCheckResponse(status='ok', uptime=3600)
+        ```
+      operationId: health_check_v1_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: 'ok'
+                  uptime:
+                    type: string
+                    example: '3600'
+                required:
+                  - status
+                  - uptime
+
+  '/v1/usage':
+    get:
+      tags:
+        - Usage
+      summary: Get Usage
+      description: |-
+        Retrieve the current token usage for the authenticated user.
+
+        - **user**: Authenticated user information (through HTTP Bearer header)
+        - **Returns**: Usage statistics for the user's token consumption
+
+        ### Example
+        ```python
+        # Retrieves token usage for the logged-in user
+        usage = await get_usage(user)
+        ```
+      operationId: get_usage_v1_usage_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                '$ref': '#/components/schemas/Usage'
+      security:
+        - HTTPBearer: []
+  '/v1/attestation/report':
+    get:
+      tags:
+        - Attestation
+      summary: Get Attestation
+      description: |-
+        Generate a cryptographic attestation report.
+
+        - **user**: Authenticated user information (through HTTP Bearer header)
+        - **Returns**: Attestation details for service verification
+
+        ### Attestation Details
+        - `verifying_key`: Public key for cryptographic verification
+        - `cpu_attestation`: CPU environment verification
+        - `gpu_attestation`: GPU environment verification
+
+        ### Security Note
+        Provides cryptographic proof of the service's integrity and environment.
+      operationId: get_attestation_v1_attestation_report_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                '$ref': '#/components/schemas/AttestationResponse'
+      security:
+        - HTTPBearer: []
+  '/v1/models':
+    get:
+      tags:
+        - Model
+      summary: Get Models
+      description: |-
+        List all available models in the system.
+
+        - **user**: Authenticated user information (through HTTP Bearer header)
+        - **Returns**: Dictionary of available models
+
+        ### Example
+        ```python
+        # Retrieves list of available models
+        models = await get_models(user)
+        ```
+      operationId: get_models_v1_models_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  '$ref': '#/components/schemas/ModelMetadata'
+                type: array
+                title: Response Get Models V1 Models Get
+      security:
+        - HTTPBearer: []
+  '/v1/chat/completions':
+    post:
+      tags:
+        - Chat
+      summary: Chat Completion
+      description: |-
+        Generate a chat completion response from the AI model.
+
+        - **req**: Chat completion request containing messages and model specifications
+        - **user**: Authenticated user information (through HTTP Bearer header)
+        - **Returns**: Full chat response with model output, usage statistics, and cryptographic signature
+
+        ### Request Requirements
+        - Must include non-empty list of messages
+        - Must specify a model
+        - Supports multiple message formats (system, user, assistant)
+
+        ### Response Components
+        - Model-generated text completion
+        - Token usage metrics
+        - Cryptographically signed response for verification
+
+        ### Processing Steps
+        1. Validate input request parameters
+        2. Prepare messages for model processing
+        3. Generate AI model response
+        4. Track and update token usage
+        5. Cryptographically sign the response
+
+        ### Potential HTTP Errors
+        - **400 Bad Request**:
+          - Missing messages list
+          - No model specified
+        - **500 Internal Server Error**:
+          - Model fails to generate a response
+
+        ### Example
+        ```python
+        # Generate a chat completion
+        request = ChatRequest(
+            model="Llama-3.2-1B-Instruct",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant"},
+                {"role": "user", "content": "Hello, who are you?"}
+            ]
+        )
+        response = await chat_completion(request, user)
+      operationId: chat_completion_v1_chat_completions_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              '$ref': '#/components/schemas/ChatRequest'
+              default:
+                model: Llama-3.2-1B-Instruct
+                messages:
+                  - role: system
+                    content: You are a helpful assistant.
+                  - role: user
+                    content: What is your name?
+                temperature: 0.2
+                top_p: 0.95
+                max_tokens: 2048
+                stream: false
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                '$ref': '#/components/schemas/HTTPValidationError'
+      security:
+        - HTTPBearer: []
+components:
+  schemas:
+    AttestationResponse:
+      properties:
+        verifying_key:
+          type: string
+          title: Verifying Key
+        cpu_attestation:
+          type: string
+          title: Cpu Attestation
+        gpu_attestation:
+          type: string
+          title: Gpu Attestation
+      type: object
+      required:
+        - verifying_key
+        - cpu_attestation
+        - gpu_attestation
+      title: AttestationResponse
+    ChatRequest:
+      properties:
+        model:
+          type: string
+          title: Model
+        messages:
+          items:
+            '$ref': '#/components/schemas/Message'
+          type: array
+          title: Messages
+        temperature:
+          anyOf:
+            - type: number
+            - type: 'null'
+          title: Temperature
+          default: 0.2
+        top_p:
+          anyOf:
+            - type: number
+            - type: 'null'
+          title: Top P
+          default: 0.95
+        max_tokens:
+          anyOf:
+            - type: integer
+            - type: 'null'
+          title: Max Tokens
+          default: 2048
+        stream:
+          anyOf:
+            - type: boolean
+            - type: 'null'
+          title: Stream
+          default: false
+      type: object
+      required:
+        - model
+        - messages
+      title: ChatRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            '$ref': '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    HealthCheckResponse:
+      properties:
+        status:
+          type: string
+          title: Status
+        uptime:
+          type: string
+          title: Uptime
+      type: object
+      required:
+        - status
+        - uptime
+      title: HealthCheckResponse
+    Message:
+      properties:
+        role:
+          type: string
+          title: Role
+        content:
+          type: string
+          title: Content
+      type: object
+      required:
+        - role
+        - content
+      title: Message
+    ModelMetadata:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        version:
+          type: string
+          title: Version
+        description:
+          type: string
+          title: Description
+        author:
+          type: string
+          title: Author
+        license:
+          type: string
+          title: License
+        source:
+          type: string
+          title: Source
+        supported_features:
+          items:
+            type: string
+          type: array
+          title: Supported Features
+      type: object
+      required:
+        - name
+        - version
+        - description
+        - author
+        - license
+        - source
+        - supported_features
+      title: ModelMetadata
+    Usage:
+      properties:
+        prompt_tokens:
+          type: integer
+          title: Prompt Tokens
+        completion_tokens:
+          type: integer
+          title: Completion Tokens
+        total_tokens:
+          type: integer
+          title: Total Tokens
+      type: object
+      required:
+        - prompt_tokens
+        - completion_tokens
+        - total_tokens
+      title: Usage
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+        - loc
+        - msg
+        - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer
+tags:
+  - name: Attestation
+    description: Retrieve cryptographic attestation information for service verification
+  - name: Chat
+    description: AI-powered chat completion endpoint for generating conversational responses
+  - name: Health
+    description: System health and status monitoring endpoint
+  - name: Model
+    description: Retrieve information about available AI models
+  - name: Usage
+    description: Track and retrieve user token consumption metrics

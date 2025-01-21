@@ -1,0 +1,81 @@
+---
+id: health-check-v-1-health-get
+title: "Health Check"
+description: "Perform a system health check."
+sidebar_label: "Health Check"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVt9vIjcQ/lfmNg+5i2CXXKU+IEU9mqN3VFUuCqmqKkSJWQZw2LVd27tki/jfO2MvhOTSVqrUt+MFrz2//X0z3iReLFzSv0k+oyj8MrntJDN0uZXGS62SfnKJdq5tCQJc4zyWsAyCkC8xX6UTNVFdODm5Ql9Z5U5O+nBeWYvKvxB3XvjKgVAzqMh0iax5dHQE0S+cszn4iF7IwrHNS6trSaGQ4z8qSWc1WjmXueC4QM939rVBG/ZE0Tph7Ss02noH+fNgnrsex5hGasZmtQ2a99HIfX+3TyG84irXdMrriQIgrUmiV5OEtMZRVjqYVypnCakWoKiEoiia4CFGQbIfq2gP/BL39RIOpogKbKVYdRfs8FGUpqDY7+/vTeOX7PmI8vRWYo2vVnui2s8zEGshfXt6F67u7TvWHz4azH2/vYVwCVfojFYO30YjZ8d6ddxpK3f23fe93rsQQ9JJ9vUYzQgoh8bv6tO79nuBnkRta5Sgtkne93r89xxn4yrP0bl5VcAuAtKjMnu6PxYXxhTt9WcPjnU2iSNvpeCVbwySFT19oHxI0ViOzsvoMaZyIOeobGpBchjLyqqrZNtJYp7/LMlFSLZbzoqgaXHG/Gld7C3cbvnXSUqku+L6xEIYQSTrJ1l9msUC0Z5DS+BmFm6SyhZcS++N62eZkoWQqSPWTPVjSl960aSPzZ/JS5aOowigqqXVquSabW/ZNDFA+mbMhYq1+Hx9ffkjCov2IEt2yJEEMfqeRgFOQKq5DpLSh+wvZDEYfRXARA0UDEZQ6hkSESkjhr0phA/dw+g1UqFg2kAICTvMoDkRXHkZ6FSaypNKGvEOQ+EaGFyO4LyQTOBPqFqwscBvgra8hsoh6MoGQamg4TXdPGPgB/hkUXhQuHZv4HddQS4UiMrrkszkTEZYRKNIPSaPbgo5tcI2bOyhcp4O5rgGJ/nmiVVoXLoj5E/awmUgIrWtGgvGmwvUmAq3ZHKNFIGiKAK7vxhUHGXrUtuJMtKQnyhCykoY2d0fdymg4GmXOcbsWo8x3Il6Ve8pr66Ef4NS1ppImVPQpTuLHroa0iyuuztvlNth9j+LWowDBrJrglFc/sdiKFPui/GhDclrXbjs9RS7i9eqcxDG/1YhrguzJqL/ZW0Gc492Z57w3OHAjimppagZZ9TfCHi70cDIfw48vyTMlmJFU4caNjILCOeSuqAVuYe1pHYeED+KJKOemcKFJt5ZJD1VkUkuLbcmJAAvKZ2C4ngzUcRZslK6L/Nx1HzeaAqKJyUetl2XvDHrlShb0vM5ux1Xhmcrd8SShjUdPmiHaS6m1DH0h0NL1D2oZSO38idTAyOoy8D7tMfN8lm7W6/XqQjHqbaLrNV12S+j8+HFeNhlHbLJzTJ2nV56GreMdp6yP3Bz+K542a02T3Pl2/vm2/vm79437Wz0+OgzmmRShQcCI3bTzvGbpD4lweX+7bwkHPL2ZkN9D3+1xXbL28RF29A+LWthpZjyJL253QbVGU9iGv0rbJge9AwyzK5aFBW7/+rdw3N9/6r4NLymKf0XjlsyVQ==
+sidebar_class_name: "get api-method"
+info_path: api/nilai/nilai
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Health Check"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/health"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Perform a system health check.
+
+- **Returns**: Current system health status and uptime
+
+### Health Check Details
+- Provides a quick verification of system operational status
+- Reports current system uptime
+
+### Status Indicators
+- `status`: Indicates system operational condition
+  - `"ok"`: System is functioning normally
+- `uptime`: Duration the system has been running
+
+### Example
+```python
+# Retrieve system health status
+health = await health_check()
+# Expect: HealthCheckResponse(status='ok', uptime=3600)
+```
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"object","properties":{"status":{"type":"string","example":"ok"},"uptime":{"type":"string","example":"3600"}},"required":["status","uptime"]}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

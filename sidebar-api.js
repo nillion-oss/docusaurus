@@ -43,4 +43,16 @@ module.exports = [
       },
     ],
   },
+  {
+    type: 'category',
+    label: 'NilAI API',
+    items: [
+      'api/nilai/overview',
+      'api/nilai/chat-completion-v-1-chat-completions-post',
+      'api/nilai/get-attestation-v-1-attestation-report-get',
+      'api/nilai/get-models-v-1-models-get',
+      'api/nilai/get-usage-v-1-usage-get',
+      'api/nilai/health-check-v-1-health-get',
+    ],
+  },
 ];

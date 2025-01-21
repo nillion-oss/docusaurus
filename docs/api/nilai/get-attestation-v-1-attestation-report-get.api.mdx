@@ -1,0 +1,74 @@
+---
+id: get-attestation-v-1-attestation-report-get
+title: "Get Attestation"
+description: "Generate a cryptographic attestation report."
+sidebar_label: "Get Attestation"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVl1v2zYU/Sus8tAtsKWkj3lZvSzLvA2pUacbhjlIaJmWmNAkR1J2VCP/feeKsiPFQTcM2MuwwEBE6X6c+3Uut0nghU/Ofk9GIQgfeJBGJzeDZCF87qRtjmfJpdDC8SAYZ7mrbTCF47aUOePPWswJa1xIZ3qmh+z4uPLCHR+fsVEVSqGDzKG/YPSWSb00bhW1vgqlM1VRsh+uryfsW8EdBErBF8J9HQ19FKFy2je2Ou4WInCpPIMpBqNrmQu2Fk4uyRMECMfR0VFP57uoQ3bvGtla6uL2QdR3Z2xSzRUiwqEx2Y+zbxjaua1uO8FD/3zyiQm9ls7oFeI9VCkOVC6/qBLhT0VeORlqdmWCmOmJM2uJ4rzAZ50xS4Yfcr3LxluPRAdRNNpcL7qu0mSQGEs1havxAiUuROiiu12f9o6xuLeQgqYT3hrtBRpnm7w7OaF//YaZVnkuvF9Win1shaGXG+DRgcS5taqNNLv3pLNNfF6KFacnhANwQUYPvUrRi1BbASc+OLyE3SCDohe/7ATZTxB8gsN+yr+ke26rbquQdvH3tS9fakO9lTXze5HHrP1RSScWNG39kA6BHjq/eXbWcbRP7hP9DRLfdgt8bBOaqDhQON48wcJKhNK01YYPy0OJQ7Y+zTqusljrhKw5APWNscopiJYhWH+WZVoqLlOPrpqbxxQnU9TpY/05eckc0yjS7b2EkOyATqnmscxduPtMk0NC0ojhPI8CFCuxSCPZpuVKqtH4AMBMjzQbjdnKLISKo4H+sIoH4iBmzUagJmxeswaSGDB06RIjBsriCoeVrQJU0jiQ7IL7mo0mY3auJM1sS43txP7K8SoYojlmKtcISs1qekZTUyd8wy6d4IFpsfFv2G+mYjnXjFfBECPmXKmaFR2+jW6UnDvuajJ2X/mAD0uxYV6urMLAB2F9umOM78FekxqFJr5bC0WjBMq7u7ubc19Cho01Sq1UQxYfrNCEsnVp3ExbaeEnikBZcyuH+89DAGo8sf1SaKJrPUa4M/2q3nNcQ8n+qpWy1kRK9MCGqFn0MDQszeLzcOcNsXWj/5Gv+bTpgewabRQf/2EytF3tk/G+hRSMUT57PcRh8Vp2OjD+tQxRXmhqYve/zM1oGbBYW/Po5wEBe4ugSr6mPgNVo/GWlc6pl6nz+40XSvTsij9g9cjABE0B+pwWjON5YBsZytjx493+8Sl2FubOCejpCiYptcSCYBq41QsFHG9mxHawsvIfltOo2ScaBTwp5rBdIPBGU6/5qh16+k5up5VteQtbRBJb3Rsv0pzPwRjmfdcS2APbRxBxPpsaWQ6WYe/SE5jo091ms0l58zk1rshaXZ/9PD6/uJpeDEkHNoksI+ucpKfxlTU+IPqOm0sReqviBWFtn7fk/9eu/+K1q11sQTyGDGtINleNpt227ULG9eAUgv37QLuUsTpLtBQJbbegMPHJqacneo2xcrT38bjmTvI5LUWsfSg0ZW22eHOBSka4nFkalDVXFYE5uI31LguXF9cEpyJs+8XcLuLB7oGst5+4rju2AbORuDYPQgPqoAUR6AxHuLf8CUFbgRQ=
+sidebar_class_name: "get api-method"
+info_path: api/nilai/nilai
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get Attestation"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/attestation/report"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Generate a cryptographic attestation report.
+
+- **user**: Authenticated user information (through HTTP Bearer header)
+- **Returns**: Attestation details for service verification
+
+### Attestation Details
+- `verifying_key`: Public key for cryptographic verification
+- `cpu_attestation`: CPU environment verification
+- `gpu_attestation`: GPU environment verification
+
+### Security Note
+Provides cryptographic proof of the service's integrity and environment.
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"properties":{"verifying_key":{"type":"string","title":"Verifying Key"},"cpu_attestation":{"type":"string","title":"Cpu Attestation"},"gpu_attestation":{"type":"string","title":"Gpu Attestation"}},"type":"object","required":["verifying_key","cpu_attestation","gpu_attestation"],"title":"AttestationResponse"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      
