@@ -55,7 +55,7 @@ Verify your recovery phrase by filling in ordered words. Then name your wallet a
 
     3. "Approve" adding the Nillion Testnet within Keplr.
 
-    4. In the Keplr extension, click the hamburger menu and click "Manage Chain Visibility." This opens the Select Chains page in a new tab. Search for "NIL" and click the checkmark to make the Nillion Testnet visible from within Keplr. Click "Save."
+    4. In the Keplr extension, click the hamburger icon and click "Manage Chain Visibility." This opens the Select Chains page in a new tab. Search for "NIL" and click the checkmark to make the Nillion Testnet visible from within Keplr. Click "Save."
 
     5. Verify setup by toggling Keplr back open. Scroll down to the bottom of the "Home" tab, where you should see a new NIL token balance of 0 NIL.
 
