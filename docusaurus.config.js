@@ -33,6 +33,12 @@ const config = {
     locales: ['en'],
   },
 
+  // Add version information
+  customFields: {
+    version: '1.0.0',
+    lastUpdated: new Date().toISOString(),
+  },
+
   scripts: [
     {
       src: '/js/piwik.js',
@@ -63,6 +69,50 @@ const config = {
       attributes: {
         name: 'google-site-verification',
         content: 'AaBcABcNNZ4eaHnfCCOfrhzAWLWI7IpKLePjkSBMGp4',
+      },
+    },
+    // Add Open Graph meta tags
+    {
+      tagName: 'meta',
+      attributes: {
+        property: 'og:title',
+        content: 'Nillion Builder Documentation',
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        property: 'og:description',
+        content: 'Comprehensive documentation for building on the Nillion secure computation network',
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        property: 'og:type',
+        content: 'website',
+      },
+    },
+    // Add Twitter Card meta tags
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'twitter:card',
+        content: 'summary_large_image',
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'twitter:site',
+        content: '@nillionnetwork',
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'keywords',
+        content: 'Nillion, secure computation, privacy, blockchain, cryptography, web3, documentation',
       },
     },
   ],
@@ -171,6 +221,7 @@ const config = {
         },
       },
       footer: {
+        style: 'dark',
         links: [
           {
             title: 'Community',
@@ -222,8 +273,44 @@ const config = {
               },
             ],
           },
+          {
+            title: 'Resources',
+            items: [
+              {
+                label: 'API Reference',
+                to: '/api-reference',
+              },
+              {
+                label: 'Examples',
+                to: '/examples',
+              },
+              {
+                label: 'FAQ',
+                to: '/faq',
+              },
+            ],
+          },
         ],
-        copyright: `${new Date().getFullYear()} Nillion. All Rights Reserved.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Nillion Network. Built with Docusaurus.`,
+      },
+      announcementBar: {
+        id: 'support_us',
+        content:
+          '🎉 Welcome to the new Nillion documentation! Join our <a target="_blank" rel="noopener noreferrer" href="https://discord.com/invite/nillionnetwork">Discord</a> for support',
+        backgroundColor: '#20232a',
+        textColor: '#fff',
+        isCloseable: true,
+      },
+      metadata: [
+        {name: 'author', content: 'Nillion Network'},
+        {name: 'application-name', content: 'Nillion Docs'},
+        {name: 'apple-mobile-web-app-title', content: 'Nillion Docs'},
+      ],
+      versions: {
+        current: {
+          label: 'Current',
+          path: '',
+        },
       },
     }),
   plugins: [
