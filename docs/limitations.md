@@ -1,14 +1,22 @@
 # Limitations
 
-Our SDK release provides developers with the chance to start building with Nillion. The current release allows developers to build with our Python, JavaScript and CLI clients, Nada language, and our command line tools. As we build the Nillion SDK and tools in public, we want to work with the community to make them even better.
+## Overview
 
-## Expectations
+The Nillion SDK is currently in active development, providing developers with essential tools to build on the Nillion Network. This document outlines the current limitations and constraints you should be aware of when developing with our SDK.
 
-- Evolving UX, developer tools, and documentation
-- Frequent, sometimes breaking changes, but we will do our best to communicate them ahead of time in [Announcements](https://github.com/orgs/NillionNetwork/discussions)
-- Bugs - please report any you find in [Bugs](https://github.com/orgs/NillionNetwork/discussions/categories/bugs)
-- Missing features - suggest a feature request in [Ideas](https://github.com/orgs/NillionNetwork/discussions/categories/ideas)
-- Documentation gaps - if you notice something is missing, please let us know by creating a [Github Issue](https://github.com/NillionNetwork/nillion-docs/issues/new/choose)
+Our current release includes:
+- Python, JavaScript, and CLI clients
+- Nada programming language
+- Command line development tools
+
+## Development Status and Expectations
+
+- **Active Development**: The SDK is evolving rapidly with frequent updates
+- **Breaking Changes**: May occur but will be communicated via [Announcements](https://github.com/orgs/NillionNetwork/discussions)
+- **Community Feedback**:
+  - Report bugs in [Bugs](https://github.com/orgs/NillionNetwork/discussions/categories/bugs)
+  - Suggest features in [Ideas](https://github.com/orgs/NillionNetwork/discussions/categories/ideas)
+  - Report documentation issues via [Github Issues](https://github.com/NillionNetwork/nillion-docs/issues/new/choose)
 
 Here are some of the limitations or constraints you should be aware of when being an early builder with Nillion’s SDK.
 
@@ -25,23 +33,34 @@ If you are on a Windows machine, follow our [Windows guide](/installation#window
 
 ## Nillion Clients
 
-- We have released 3 clients to the community: a Python, JavaScript, and CLI Client. In general the clients have feature parity, however please refer to the [Nillion Client docs](/nillion-client) to see the exact functionality provided by each.
-- You can only compile programs from the CLI `pynadac` or `nada` tools — compilation isn’t available in the Python or JavaScript clients.
-- If there is a particular feature you need and believe is missing in one of the clients, please report it in [Bugs](https://github.com/orgs/NillionNetwork/discussions/categories/bugs).
+### General Limitations
+- Three available clients: Python, JavaScript, and CLI
+- Program compilation is restricted to CLI tools (`pynadac` or `nada`)
+- Each client requires a unique node key to prevent timeout errors
 
-### JavaScript Client
+### JavaScript Client Specifics
+- Browser Support: 
+  - Fully supported: Chromium-based browsers (Chrome, Brave, Edge)
+  - Limited support: Firefox, Safari
+  - Not supported: Internet Explorer
+- Security Requirements:
+  - [COOP and COEP headers](https://web.dev/coop-coep/) for production deployments
+  - Cross-Origin-Opener-Policy: same-origin
+  - Cross-Origin-Embedder-Policy: require-corp
+- Environment Constraints:
+  - Currently browser-only implementation
+  - NodeJS support is planned for future releases
+  - Web Workers are required for computation
+- Performance Considerations:
+  - Computation speed depends on browser capabilities
+  - Memory usage scales with secret size
+  - Network latency affects operation timing
 
-- Currently the JS client is only tested on Chromium browsers (Chrome, Brave & Edge) and production deployments will likely require [activating COOP and COEP headers](https://web.dev/coop-coep/).
-- The JS client is a browser client and does not yet work in NodeJs.
-
-### CLI Client
-
-Running the [`nillion-devnet`](/nillion-devnet) command (SDK tool) will spin up a local devnet on your machine.
-
-- The devnet that is spun up will be limited by the hardware it is running on. Keep an eye on the CPU usage when running large computations.
-- Pre-processing elements are generated from scratch each time a local devnet is spun up. This means you may need to wait a little time (10-15 seconds) before the network is able to store and compute. For reference, currently 8192 alphas & 8192 lambdas are generated when you spin up a new local devnet.
-- Anything you store (programs, secrets etc) in one instance of `nillion-devnet` will not be shared with another devnet you spin up, meaning you will have to restore any stored programs or secrets in the new devnet.
-- The devnet does not currently support transport targets other than localhost.
+### CLI Client and DevNet
+- Performance depends on local hardware resources
+- Network initialization requires 10-15 seconds for preprocessing (8192 alphas & lambdas)
+- State Persistence: Data (programs, secrets) doesn't persist between devnet instances
+- Transport: Currently limited to localhost
 
 ### One node key per client
 
@@ -56,30 +75,28 @@ Running the [`nillion-devnet`](/nillion-devnet) command (SDK tool) will spin up 
 
 Check the [Nada language docs](/nada-lang) for the current [data types](/nada-lang-types) and [operations](/nada-lang-operators) available.
 
-### No random value generation in Nada
+### Current Limitations
+1. No random value generation (planned for future releases)
+2. Limited function composition due to scope management
+3. No division by zero support
+4. Simplified variable scope management
 
-- We expect random value generation in Nada in the future.
-
-### No function composition / Simplified scope
-
-Function composition is not yet possible due to Nada's simplified variable and scope management. Consider the following code fragment:
-
+Example of unsupported function composition:
 ```python
+# This will not work due to scope limitations
 def inc(a: SecretInteger, my_int: SecretInteger) -> SecretInteger:
     return a + my_int
 
 def inc2(a: SecretInteger) -> SecretInteger:
-    return inc(a, SecretInteger(2))
+    return inc(a, SecretInteger(2))  # Error: inc is not accessible
 ```
 
-The Nada compiler will throw an error as `inc2` does not have access to `inc`.
+## Network Participation
 
-### Zeros
+- Local development: Available through [nillion-devnet](/nillion-devnet)
+- Testnet node operation: Currently permissioned
+- Future plans: Transition to permissionless model
 
-- Ensure that your programs do not attempt to divide by 0, this is not supported in our language currently.
-
-## Run a testnet node
-
-Developers can run a local Nillion Network node with the [nillion-devnet](/nillion-devnet) tool.
-
-Today, running a Nillion Network Testnet node is permissioned. We plan to transition to a permissionless model in the future, allowing the public to participate as node operators. When this changes, you’ll hear about it on our [X](https://x.com/nillionnetwork) and [Discord](https://discord.com/invite/nillionnetwork). Follow us to stay updated.
+Stay updated on network developments:
+- Follow on [X](https://x.com/nillionnetwork)
+- Join our [Discord](https://discord.com/invite/nillionnetwork)
