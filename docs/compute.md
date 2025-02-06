@@ -1,5 +1,7 @@
-<!-- import Tabs from '@theme/Tabs';
+import Tabs from '@theme/Tabs';
+
 import TabItem from '@theme/TabItem';
+
 import DocCardList from '@theme/DocCardList';
 
 # Compute
@@ -10,7 +12,7 @@ Perform single or multi party computation using secrets stored in the network.
 
 ## Single Party Compute
 
-Single party compute involves only one Party that provides inputs and receives outputs of a program. Single party compute examples are available in the Python Starter Repo [core_concept_single_party_compute folder](https://github.com/NillionNetwork/nillion-python-starter/core_concept_single_party_compute).
+Single party compute involves only one Party that provides inputs and receives outputs of a program. Single party compute examples are available in the Python Starter Repo [core_concept_single_party_compute folder](https://github.com/NillionNetwork/python-examples/tree/main/examples_and_tutorials/core_concept_single_party_compute).
 
 ### Example: addition_simple.py
 
@@ -60,7 +62,7 @@ https://github.com/NillionNetwork/python-examples/tree/main/examples_and_tutoria
     ### Step 1: 1st Party Stores a Secret
 
 ```python reference showGithubLink
-https://github.com/NillionNetwork/python-examples/tree/main/examples_and_tutorials/core_concept_multi_party_compute/01_store_secret_party1.py#L19-L100
+https://github.com/NillionNetwork/python-examples/blob/main/examples_and_tutorials/core_concept_multi_party_compute/01_store_program.py#L19-L100
 ```
 
   </TabItem>
@@ -80,4 +82,4 @@ https://github.com/NillionNetwork/python-examples/tree/main/examples_and_tutoria
 ```
 
   </TabItem>
-</Tabs> -->
+</Tabs>

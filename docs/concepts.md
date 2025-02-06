@@ -26,7 +26,7 @@ A `Party` is a named entity involved in Nada program computation. Parties can su
 
 #### Party ID
 
-The `party_id`, sometimes called [`peer_id`](concepts#peer-id), is the public identifier for a `Party`.
+The `party_id`, sometimes called [`peer_id`](concepts.md#peer-id), is the public identifier for a `Party`.
 
 #### Inputs
 

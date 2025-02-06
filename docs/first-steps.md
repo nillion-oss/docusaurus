@@ -8,13 +8,13 @@ This page will help you take your first steps (~30 mins) as a Nillion developer.
 
    🚨 Add the topic `nillion-nada` to this repo so we can find it easily
 
-2. Follow at least one of the quickstarts: [Python Quickstart](/python-quickstart) or [JavaScript Blind App Quickstart](/quickstart)
+2. Follow at least one of the quickstarts: [Python Quickstart](/docs/python-quickstart.md) or [JavaScript Blind App Quickstart](/docs/quickstart-blind-app.md)
 
-   🚨 Make sure you [enable telemetry](/nillion-sdk-and-tools#installation) as you install the Nillion SDK
+   🚨 Make sure you [enable telemetry](/docs/nillion-sdk-and-tools.md) as you install the Nillion SDK
 
-3. Once you have completed the quickstart, add at least one new [nada program](/nada-lang-programs) to your repo (bonus points for creativity, but make sure it compiles and runs)
+3. Once you have completed the quickstart, add at least one new [nada program](https://github.com/NillionNetwork/nillion-python-starter/tree/main/quickstart_complete/nada_quickstart_programs) to your repo (bonus points for creativity, but make sure it compiles and runs)
 
-   - Python quickstart: add your nada program in your repo's [programs](https://github.com/NillionNetwork/nillion-python-starter/tree/main/programs) folder
+   - Python quickstart: add your nada program in your repo's [programs](https://github.com/NillionNetwork/nillion-python-starter/tree/main/quickstart_complete/nada_quickstart_programs) folder
    - JavaScript quickstart: add your program in your repo's [public/programs](https://github.com/NillionNetwork/cra-nillion/tree/main/public/programs) folder
 
 4. Join our community:
