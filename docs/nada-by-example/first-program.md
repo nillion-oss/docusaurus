@@ -72,7 +72,7 @@ https://github.com/NillionNetwork/nada-by-example/blob/main/src/addition.py#L9
 
 ### Outputs
 
-An `Output` defines how the result of the computation is shared with the parties. It ensures that the  result of blind computation is properly revealed only to the intended party or parties.
+An `Output` defines how the result of the computation is shared with the parties. It ensures that the result of blind computation is properly revealed only to the intended party or parties.
 
 ```python reference showGithubLink
 https://github.com/NillionNetwork/nada-by-example/blob/main/src/addition.py#L10

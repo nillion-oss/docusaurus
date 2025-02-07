@@ -57,7 +57,7 @@ https://github.com/NillionNetwork/nada-by-example/blob/main/tests/debug_test.yam
 
 ### Print type of variable
 
-Printing the type of a variable prints the Nada data type to your terminal as a class. When debugging with `type()`, double check that your Nada operation supports the type printed by looking at the [Nada Operations](/nada-by-example/nada-operations) Supported Types column.
+Printing the type of a variable prints the Nada data type to your terminal as a class. When debugging with `type()`, double-check that your Nada operation supports the type printed by looking at the [Nada Operations](/nada-by-example/nada-operations) Supported Types column.
 
 ```
 print(type(sum))
