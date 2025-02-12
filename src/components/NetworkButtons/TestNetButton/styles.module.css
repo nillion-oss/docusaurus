@@ -1,0 +1,29 @@
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 2rem;
+  /* background: rgb(0, 33, 245); */
+  background: #4159f6;
+  color: white;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.button:hover {
+  background-color: #165bfa;
+}
+
+.button:active {
+  background-color: #4159f6;
+}
+
+.keplrImg {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  border-radius: 4px;
+}
