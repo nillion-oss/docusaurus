@@ -79,7 +79,7 @@ import TabItem from '@theme/TabItem';
 
 4. 🏁 You can now use the [Create Query endpoint](../../api/nildb/overview.md) to register your query on your **SecretDataAnalytics** nodes. You can find an example below:
    - 1️⃣ Node info acquisition details can be found on the [Access](access.md) page
-   - 2️⃣ Token acquisition details can be found on the [Generatin API Tokens](generate-tokens.md) page
+   - 2️⃣ Token acquisition details can be found on the [Generating API Tokens](generate-tokens.md) page
 
 <details>
 <summary>Code Sample</summary>

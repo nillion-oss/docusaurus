@@ -23,7 +23,7 @@ import TabItem from '@theme/TabItem';
 3. 🏁 You can now use the `POST /queries` endpoint to retrieve the results - check out the [Execute Queries endpoint](../../api/nildb/add-a-new-query.api.mdx) page for details. You can find an example below:
 
    - 1️⃣ Node info acquisition details can be found on the [Access](access.md) page
-   - 2️⃣ Token acquisition details can be found on the [Generatin API Tokens](generate-tokens.md) page
+   - 2️⃣ Token acquisition details can be found on the [Generating API Tokens](generate-tokens.md) page
 
 <details>
 <summary>Code Samples</summary>
