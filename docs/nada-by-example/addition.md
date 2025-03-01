@@ -1,5 +1,7 @@
 # Addition
 
+This example demonstrates how to perform basic addition operations in Nada. It shows a simple implementation of adding two numbers together, showcasing the fundamental arithmetic capabilities of the Nada language.
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import TestProgram from '@site/src/components/TestProgram/index';

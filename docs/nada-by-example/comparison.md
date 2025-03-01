@@ -4,7 +4,12 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import TestProgram from '@site/src/components/TestProgram/index';
 
+Nada supports standard comparison operations for comparing numerical values. These operators return boolean values (true/false) and can be used in conditional statements or calculations. Each comparison is performed securely, maintaining the privacy of the operands.
+
+The following comparison operators are available:
+
 ## Less than `<`
+Returns `true` if the first value is less than the second value.
 
 <Tabs>
 
@@ -24,6 +29,7 @@ https://github.com/NillionNetwork/nada-by-example/blob/main/tests/comparison_lt_
 <TestProgram programName="comparison_lt"/>
 
 ## Less than or equal to `<=`
+Returns `true` if the first value is less than or equal to the second value.
 
 <Tabs>
 
@@ -43,6 +49,7 @@ https://github.com/NillionNetwork/nada-by-example/blob/main/tests/comparison_lte
 <TestProgram programName="comparison_lte"/>
 
 ## Greater than `>`
+Returns `true` if the first value is greater than the second value.
 
 <Tabs>
 
@@ -62,6 +69,7 @@ https://github.com/NillionNetwork/nada-by-example/blob/main/tests/comparison_gt_
 <TestProgram programName="comparison_gt"/>
 
 ## Greater than or equal to `>=`
+Returns `true` if the first value is greater than or equal to the second value.
 
 <Tabs>
 

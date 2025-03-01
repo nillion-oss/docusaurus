@@ -4,7 +4,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import TestProgram from '@site/src/components/TestProgram/index';
 
-Argmax is a data wrangling operation to find the index of the maximum value in a list of values.
+The arg max (argument of the maximum) operation finds the index of the maximum value in a sequence of numbers. For example, in the sequence [3, 1, 4, 1, 5], the arg max would return 4 because the maximum value (5) is at index 4.
 
 <Tabs>
 

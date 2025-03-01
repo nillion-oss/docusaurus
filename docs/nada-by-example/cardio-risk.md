@@ -4,7 +4,12 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import TestProgram from '@site/src/components/TestProgram/index';
 
-The cardio risk example program returns a risk score that depends on private checks.
+This example demonstrates a privacy-preserving cardiovascular risk assessment program. It calculates a risk score based on several private health metrics (such as blood pressure, cholesterol levels, etc.) without exposing the individual values. The program uses secure computation to protect sensitive medical data while still providing meaningful risk assessment results.
+
+The risk score is computed on a scale from 0 to 100, where:
+- 0-20: Low risk
+- 21-50: Moderate risk
+- 51-100: High risk
 
 <Tabs>
 
